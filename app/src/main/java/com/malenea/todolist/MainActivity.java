@@ -1,0 +1,135 @@
+package com.malenea.todolist;
+
+import android.content.DialogInterface;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import static android.R.attr.typeface;
+
+
+public class MainActivity extends AppCompatActivity {
+    DbHelper dbHelper;
+    ArrayAdapter<String> adapter;
+    ListView listTask;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        TextView tx = (TextView) findViewById(R.id.program_title);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/MyFont.otf");
+        tx.setTypeface(custom_font);
+
+        dbHelper = new DbHelper(this);
+        listTask = (ListView) findViewById(R.id.listTask);
+        loadTaskList();
+
+        // Do something on clicking the task in the list
+        listTask.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showPopup(view);
+            }
+        });
+
+    }
+
+    // To show the des popup of a task
+    public void showPopup(final View view) {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        final View promptView = layoutInflater.inflate(R.layout.popup, null);
+
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+
+        ImageButton btnDel = (ImageButton) promptView.findViewById(R.id.popup_del);
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteTask(view);
+                dialog.dismiss();
+            }
+        });
+
+        ImageButton btnBack = (ImageButton) promptView.findViewById(R.id.popup_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setView(promptView);
+        dialog.show();
+    }
+
+    // Use adapter to populate db and list
+    private void loadTaskList() {
+        ArrayList<String> taskList = dbHelper.getTaskList();
+        if (adapter == null) {
+            adapter = new ArrayAdapter<>(this, R.layout.row, R.id.task_title, taskList);
+            listTask.setAdapter(adapter);
+        } else {
+            adapter.clear();
+            adapter.addAll(taskList);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    // Add a new task to the list and the db by prompting an input window
+    public void addTask(View view) {
+        final EditText taskEditText = new EditText(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Add a new todo thing")
+                .setMessage("What todo thing is it?")
+                .setView(taskEditText)
+                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String task = String.valueOf(taskEditText.getText());
+                        dbHelper.insertNewTask(task);
+                        loadTaskList();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.show();
+    }
+
+    // Delete the current task from list and db
+    public void deleteTask(View view) {
+        View parent = (View)view.getParent();
+        TextView taskTextView = (TextView) findViewById(R.id.task_title);
+        String task = String.valueOf(taskTextView.getText());
+        dbHelper.deleteTask(task);
+        loadTaskList();
+    }
+
+}

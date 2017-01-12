@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.0_ff4bf93d5c1eddbd9f6e76555013d20147691df5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_405dac7a9dcc7db27badd5785b3823d8d0fdd633/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_61e6437b6bb8ead35b4df36a2b7cb549f42cf63d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/design/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.1.0_b66fef0161152e747d26dbf2e7e4a5067469a2a8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.0_28d0be5c0d152d64d79d080c71d2adedb6d1a16f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9d20f9f4cb11de74ce50ed24465273ed67ed4849">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0925800fd106032cadbd8c4f8ea14208874ca63f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="644677e0321945dc99fa3e6824236cec9ebb49ee">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_76f85f206f725d93fd2c507bcca691eb04c27b3a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_abb4ea661c757859b4c0dee1eea8da0d6f7f08c8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.0_0f997ca84dc6097e36c948f2206b856550ba8666/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.0_4d50552cbac30fe9366ae35ef3b35d25efce16b9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.0_8e53d23f11e331c9a2c1363858da8249233e0329/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_1abe4df2b520b561bebc298e29003be85fb91746/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_7b5b462aa2d1e0f463f11e74e53a678507d4720e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_9af05060c8acba538d33c81eab3c0751d663c136/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/conan/Documents/Epitech/todolist/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="/home/conan/Documents/Epitech/todolist/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.0_139a95c8f629b8efab901ca4fd8b080f0f80657c/classes.dex" />
+    </item>
+
+</items>
