@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">todolist</string>
     <string name="program_title">My ToDo List !</string>
+
     <string name="action_add">Add a todo thing</string>
     <string name="done">Done</string>
+
     <string name="example">Example</string>
+    <string name="nodate">No date set yet.</string>
+
 </resources>
