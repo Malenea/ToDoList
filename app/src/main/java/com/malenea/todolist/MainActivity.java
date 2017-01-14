@@ -62,19 +62,29 @@ public class MainActivity extends AppCompatActivity {
         listTask.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showPopup(view);
+                String taskTitle = (String)parent.getItemAtPosition(position);
+                showPopup(view, taskTitle);
             }
         });
 
     }
 
     // To show the des popup of a task
-    public void showPopup(final View view) {
+    public void showPopup(final View view, String taskTitle) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         final View promptView = layoutInflater.inflate(R.layout.popup, null);
 
         final AlertDialog dialog = new AlertDialog.Builder(this).create();
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/MyFont.otf");
+
+        TextView tx_title = (TextView) promptView.findViewById(R.id.popup_txt);
+        tx_title.setTypeface(custom_font);
+        tx_title.setText(taskTitle);
+
+        TextView tx_date = (TextView) promptView.findViewById(R.id.popup_txtDate);
+        tx_date.setTypeface(custom_font);
 
         ImageButton btnDel = (ImageButton) promptView.findViewById(R.id.popup_del);
         btnDel.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view,
                                                   int year, int monthOfYear, int dayOfMonth) {
                                 txtDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                // Set date on db
                             }
 
                         }, mYear, mMonth, mDay);
