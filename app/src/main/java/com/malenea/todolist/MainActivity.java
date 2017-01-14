@@ -89,7 +89,29 @@ public class MainActivity extends AppCompatActivity {
         btnCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePicker();
+
+                final TextView txtDate = (TextView) promptView.findViewById(R.id.popup_txtDate);
+
+                DatePickerDialog dateDialog;
+
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                dateDialog = new DatePickerDialog(MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view,
+                                                  int year, int monthOfYear, int dayOfMonth) {
+                                txtDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+
+                        }, mYear, mMonth, mDay);
+
+                dateDialog.show();
+
             }
         });
 
@@ -103,33 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.setView(promptView);
         dialog.show();
-    }
-
-    // Show Calendar
-
-    private void showDatePicker() {
-
-        final TextView txtDate = (TextView) findViewById(R.id.popup_txtDate);
-
-        DatePickerDialog dateDialog;
-
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        dateDialog = new DatePickerDialog(MainActivity.this,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view,
-                                          int year, int monthOfYear, int dayOfMonth) {
-                        //txtDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                    }
-
-                }, mYear, mMonth, mDay);
-
-        dateDialog.show();
     }
 
     // Use adapter to populate db and list
