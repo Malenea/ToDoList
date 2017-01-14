@@ -17,12 +17,20 @@
         />
 
     <TextView
+        android:id="@+id/popup_txtTime"
+        android:text="@string/notime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/popup_txtDate"
+        android:layout_margin="@dimen/fab_margin"/>
+
+    <TextView
         android:id="@+id/popup_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/example"
-        android:layout_below="@id/popup_txtDate"
+        android:layout_below="@id/popup_txtTime"
         android:layout_margin="@dimen/fab_margin" />
 
     <ImageButton
@@ -44,13 +52,22 @@
         android:layout_margin = "@dimen/fab_margin" />
 
     <ImageButton
+        android:id="@+id/popup_clock"
+        android:background="@drawable/ic_timbtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/popup_cal"
+        android:layout_toStartOf="@+id/popup_del" />
+
+    <ImageButton
         android:id="@+id/popup_cal"
         android:background="@drawable/ic_calbtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        android:layout_alignTop="@+id/popup_back"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="19dp"
+        android:layout_alignBottom="@+id/popup_back"
+        android:layout_toEndOf="@+id/popup_back" />
 
 </RelativeLayout>

@@ -7,5 +7,6 @@
 
     <string name="example">Example</string>
     <string name="nodate">No date set yet.</string>
+    <string name="notime">No time set yet.</string>
 
 </resources>

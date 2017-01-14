@@ -1,6 +1,7 @@
 package com.malenea.todolist;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
@@ -27,10 +28,12 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -86,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
         TextView tx_date = (TextView) promptView.findViewById(R.id.popup_txtDate);
         tx_date.setTypeface(custom_font);
 
+        TextView tx_time = (TextView) promptView.findViewById(R.id.popup_txtTime);
+        tx_time.setTypeface(custom_font);
+
         ImageButton btnDel = (ImageButton) promptView.findViewById(R.id.popup_del);
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
+        final Calendar c = Calendar.getInstance();
 
         ImageButton btnCal = (ImageButton) promptView.findViewById(R.id.popup_cal);
         btnCal.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
                 DatePickerDialog dateDialog;
 
-                final Calendar c = Calendar.getInstance();
                 int mYear = c.get(Calendar.YEAR);
                 int mMonth = c.get(Calendar.MONTH);
                 int mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -115,14 +122,40 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view,
                                                   int year, int monthOfYear, int dayOfMonth) {
-                                txtDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                txtDate.setText("My todo thing is the : "
+                                        + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 // Set date on db
                             }
-
                         }, mYear, mMonth, mDay);
 
                 dateDialog.show();
 
+            }
+        });
+
+        ImageButton btnTim = (ImageButton) promptView.findViewById(R.id.popup_clock);
+        btnTim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final TextView txtTime = (TextView) promptView.findViewById(R.id.popup_txtTime);
+
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                TimePickerDialog timeDialog = new TimePickerDialog(MainActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker timePicker,
+                                                  int selectedHour, int selectMinute) {
+                                txtTime.setText(String.format("My todo thing at : %02d:%02d",
+                                        selectedHour, selectMinute));
+                                // Set time on db
+                            }
+                        }, hour, minute, true);
+
+                timeDialog.show();
             }
         });
 
