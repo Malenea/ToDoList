@@ -6,6 +6,7 @@
     <string name="done">Done</string>
 
     <string name="example">Example</string>
+    <string name="note">Insert a note for this todo task.</string>
     <string name="nodate">No date set yet.</string>
     <string name="notime">No time set yet.</string>
 

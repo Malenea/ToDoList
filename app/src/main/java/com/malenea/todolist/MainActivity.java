@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private static String LOG_TAG = "TaskViewActivity";
+    private static String LOG_TAG = "MainActivity";
 
     private static ArrayList<TaskClass> listHandler;
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 .MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Log.i(LOG_TAG, " Clicked on " + listHandler.get(position) + " " + position);
+                Log.i(LOG_TAG, " Clicked on " + listHandler.get(position) + " [" + position + "]");
                 showPopup(listHandler, position);
             }
         });
@@ -117,12 +117,13 @@ public class MainActivity extends AppCompatActivity {
         tx_time.setTypeface(custom_font);
 
         tx_title.setText(taskList.get(position).getTaskTitle());
+
         if (taskList.get(position).getTaskYear() == 0 ||
                 taskList.get(position).getTaskMonth() == 0 ||
                 taskList.get(position).getTaskDay() == 0) {
             tx_date.setText("No date set yet.");
         } else {
-            tx_date.setText("This todo task is planned on the : " +
+            tx_date.setText("This todo task is the : " +
                     taskList.get(position).getTaskDay() + "/" +
                     taskList.get(position).getTaskMonth() + "/" +
                     taskList.get(position).getTaskYear());
@@ -166,14 +167,15 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view,
                                                   int year, int monthOfYear, int dayOfMonth) {
-                                txtDate.setText("This todo task is planned on the : "
+                                txtDate.setText("This todo task is the : "
                                         + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 // Set date on db
                                 TaskClass task = new TaskClass(taskList.get(position));
                                 task.setTaskYear(year);
                                 task.setTaskMonth(monthOfYear + 1);
                                 task.setTaskDay(dayOfMonth);
-                                dbHelper.updateTask(task);
+                                int ret = dbHelper.updateTask(task);
+                                Log.i(LOG_TAG, "Update returned : " + ret);
                             }
                         }, mYear, mMonth, mDay);
 
@@ -216,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadTaskList();
                 dialog.dismiss();
             }
         });

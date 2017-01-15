@@ -1,5 +1,7 @@
 package com.malenea.todolist;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,8 +30,15 @@ public class MyRecyclerViewAdapter extends RecyclerView
 
         public DataObjectHolder(View itemView) {
             super(itemView);
+
+            Context context = itemView.getContext();
             label = (TextView) itemView.findViewById(R.id.row_task_title);
             dateTime = (TextView) itemView.findViewById(R.id.row_task_date);
+            Typeface custom_font = Typeface.createFromAsset(context.getAssets(),
+                    "fonts/MyFont.otf");
+            label.setTypeface(custom_font);
+            dateTime.setTypeface(custom_font);
+
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
