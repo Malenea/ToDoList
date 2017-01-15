@@ -18,7 +18,13 @@
         android:layout_height="wrap_content" />
 
 
-    <include layout="@layout/content_main" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listTask"
+        android:scrollbars="vertical"
+        android:layout_marginTop="70sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70sp" />
 
     <ImageButton
         android:id="@+id/add"
