@@ -117,6 +117,24 @@ public class MainActivity extends AppCompatActivity {
         tx_time.setTypeface(custom_font);
 
         tx_title.setText(taskList.get(position).getTaskTitle());
+        if (taskList.get(position).getTaskYear() == 0 ||
+                taskList.get(position).getTaskMonth() == 0 ||
+                taskList.get(position).getTaskDay() == 0) {
+            tx_date.setText("No date set yet.");
+        } else {
+            tx_date.setText("This todo task is planned on the : " +
+                    taskList.get(position).getTaskDay() + "/" +
+                    taskList.get(position).getTaskMonth() + "/" +
+                    taskList.get(position).getTaskYear());
+        }
+        if (taskList.get(position).getTaskHour() == 0 ||
+                taskList.get(position).getTaskMinute() == 0) {
+            tx_time.setText("No time set yet.");
+        } else {
+            tx_time.setText(String.format(Locale.US, "At : %02d:%02d",
+                    taskList.get(position).getTaskHour(),
+                    taskList.get(position).getTaskMinute()));
+        }
 
         ImageButton btnDel = (ImageButton) promptView.findViewById(R.id.popup_del);
         btnDel.setOnClickListener(new View.OnClickListener() {
@@ -151,6 +169,11 @@ public class MainActivity extends AppCompatActivity {
                                 txtDate.setText("This todo task is planned on the : "
                                         + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 // Set date on db
+                                TaskClass task = new TaskClass(taskList.get(position));
+                                task.setTaskYear(year);
+                                task.setTaskMonth(monthOfYear + 1);
+                                task.setTaskDay(dayOfMonth);
+                                dbHelper.updateTask(task);
                             }
                         }, mYear, mMonth, mDay);
 
@@ -178,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
                                 txtTime.setText(String.format(Locale.US, "At : %02d:%02d",
                                         selectedHour, selectMinute));
                                 // Set time on db
+                                TaskClass task = new TaskClass(taskList.get(position));
+                                task.setTaskHour(selectedHour);
+                                task.setTaskMinute(selectMinute);
+                                dbHelper.updateTask(task);
                             }
                         }, hour, minute, true);
 

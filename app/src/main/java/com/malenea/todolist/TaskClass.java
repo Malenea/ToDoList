@@ -16,6 +16,16 @@ public class TaskClass {
     TaskClass() {
     }
 
+    TaskClass(TaskClass task) {
+        this.taskId = task.getTaskId();
+        this.taskTitle = task.getTaskTitle();
+        this.taskYear = task.getTaskYear();
+        this.taskMonth = task.getTaskMonth();
+        this.taskDay = task.getTaskDay();
+        this.taskHour = task.getTaskHour();
+        this.taskMinute = task.getTaskMinute();
+    }
+
     public void setTaskId(int id) {
         this.taskId = id;
     }

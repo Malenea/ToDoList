@@ -70,6 +70,19 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public int updateTask(TaskClass task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DB_COLUMN_TITLE, task.getTaskTitle());
+        values.put(DB_COLUMN_YEAR, task.getTaskYear());
+        values.put(DB_COLUMN_MONTH, task.getTaskMonth());
+        values.put(DB_COLUMN_DAY, task.getTaskDay());
+        values.put(DB_COLUMN_HOUR, task.getTaskHour());
+        values.put(DB_COLUMN_MINUTE, task.getTaskMinute());
+        return db.update(DB_TABLE, values, DB_ID + " = ?",
+                new String[]{String.valueOf(task.getTaskId())});
+    }
+
     public ArrayList<TaskClass> getTaskList() {
         ArrayList<TaskClass> taskList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + DB_TABLE;
