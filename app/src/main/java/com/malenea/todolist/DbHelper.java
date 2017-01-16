@@ -20,12 +20,15 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_TABLE="Task";
     public static final String DB_ID="id";
     public static final String DB_COLUMN_TITLE="TaskName";
+    public static final String DB_COLUMN_DESC="TaskDesc";
 
     public static final String DB_COLUMN_YEAR="TaskYear";
     public static final String DB_COLUMN_MONTH="TaskMonth";
     public static final String DB_COLUMN_DAY="TaskDay";
     public static final String DB_COLUMN_HOUR="TaskHour";
     public static final String DB_COLUMN_MINUTE="TaskMinute";
+
+    public static final String DB_COLUMN_STATUS="TaskStatus";
 
     private static String LOG_TAG = "dbHelper";
 
@@ -38,11 +41,13 @@ public class DbHelper extends SQLiteOpenHelper {
         String createTable = "CREATE TABLE " + DB_TABLE + " (" +
                 DB_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DB_COLUMN_TITLE + " TEXT NOT NULL, " +
+                DB_COLUMN_DESC + " TEXT, " +
                 DB_COLUMN_YEAR + " INTEGER, " +
                 DB_COLUMN_MONTH + " INTEGER, " +
                 DB_COLUMN_DAY + " INTEGER, " +
                 DB_COLUMN_HOUR + " INTEGER, " +
-                DB_COLUMN_MINUTE + " INTEGER" +
+                DB_COLUMN_MINUTE + " INTEGER, " +
+                DB_COLUMN_STATUS + " INTEGER" +
                 ")";
         db.execSQL(createTable);
     }
@@ -57,11 +62,13 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DB_COLUMN_TITLE, task.getTaskTitle());
+        values.put(DB_COLUMN_DESC, task.getTaskDesc());
         values.put(DB_COLUMN_YEAR, task.getTaskYear());
         values.put(DB_COLUMN_MONTH, task.getTaskMonth());
         values.put(DB_COLUMN_DAY, task.getTaskDay());
         values.put(DB_COLUMN_HOUR, task.getTaskHour());
         values.put(DB_COLUMN_MINUTE, task.getTaskMinute());
+        values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         db.insert(DB_TABLE, null, values);
         db.close();
     }
@@ -77,11 +84,13 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DB_COLUMN_TITLE, task.getTaskTitle());
+        values.put(DB_COLUMN_DESC, task.getTaskDesc());
         values.put(DB_COLUMN_YEAR, task.getTaskYear());
         values.put(DB_COLUMN_MONTH, task.getTaskMonth());
         values.put(DB_COLUMN_DAY, task.getTaskDay());
         values.put(DB_COLUMN_HOUR, task.getTaskHour());
         values.put(DB_COLUMN_MINUTE, task.getTaskMinute());
+        values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         Log.i(LOG_TAG, "Updating id : " + task.getTaskId());
         return db.update(DB_TABLE, values, DB_ID + " = " + task.getTaskId(), null);
     }
@@ -97,11 +106,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 TaskClass task = new TaskClass();
                 task.setTaskId(cursor.getInt(cursor.getColumnIndex(DB_ID)));
                 task.setTaskTitle(cursor.getString(cursor.getColumnIndex(DB_COLUMN_TITLE)));
+                task.setTaskDesc(cursor.getString(cursor.getColumnIndex(DB_COLUMN_DESC)));
                 task.setTaskYear(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_YEAR)));
                 task.setTaskMonth(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MONTH)));
                 task.setTaskDay(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_DAY)));
                 task.setTaskHour(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_HOUR)));
                 task.setTaskMinute(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MINUTE)));
+                task.setTaskStatus(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_STATUS)));
                 taskList.add(task);
             } while (cursor.moveToNext());
         }

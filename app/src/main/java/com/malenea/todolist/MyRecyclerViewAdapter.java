@@ -1,6 +1,7 @@
 package com.malenea.todolist;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,7 @@ public class MyRecyclerViewAdapter extends RecyclerView
             .OnClickListener {
         TextView label;
         TextView dateTime;
+        TextView statusState;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -34,10 +38,13 @@ public class MyRecyclerViewAdapter extends RecyclerView
             Context context = itemView.getContext();
             label = (TextView) itemView.findViewById(R.id.row_task_title);
             dateTime = (TextView) itemView.findViewById(R.id.row_task_date);
+            statusState = (TextView) itemView.findViewById(R.id.row_task_status);
+
             Typeface custom_font = Typeface.createFromAsset(context.getAssets(),
                     "fonts/MyFont.otf");
             label.setTypeface(custom_font);
             dateTime.setTypeface(custom_font);
+            statusState.setTypeface(custom_font);
 
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
@@ -70,6 +77,18 @@ public class MyRecyclerViewAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.label.setText(mDataset.get(position).getTaskTitle());
+
+        if (mDataset.get(position).getTaskStatus() == 0) {
+            holder.statusState.setBackgroundColor(Color.LTGRAY);
+            holder.statusState.setText("?");
+        } else if (mDataset.get(position).getTaskStatus() == 1) {
+            holder.statusState.setBackgroundColor(Color.RED);
+            holder.statusState.setText("TBD");
+        } else {
+            holder.statusState.setBackgroundColor(Color.GREEN);
+            holder.statusState.setText("D");
+        }
+
         if (mDataset.get(position).getTaskDay() == 0 ||
                 mDataset.get(position).getTaskMonth() == 0 ||
                 mDataset.get(position).getTaskYear() == 0) {

@@ -7,11 +7,16 @@ package com.malenea.todolist;
 public class TaskClass {
     private int taskId;
     private String taskTitle;
+
+    private String taskDesc;
+
     private int taskYear;
     private int taskMonth;
     private int taskDay;
     private int taskHour;
     private int taskMinute;
+
+    private int taskStatus;
 
     TaskClass() {
     }
@@ -19,11 +24,13 @@ public class TaskClass {
     TaskClass(TaskClass task) {
         this.taskId = task.getTaskId();
         this.taskTitle = task.getTaskTitle();
+        this.taskDesc = task.getTaskDesc();
         this.taskYear = task.getTaskYear();
         this.taskMonth = task.getTaskMonth();
         this.taskDay = task.getTaskDay();
         this.taskHour = task.getTaskHour();
         this.taskMinute = task.getTaskMinute();
+        this.taskStatus = task.getTaskStatus();
     }
 
     public void setTaskId(int id) {
@@ -31,6 +38,9 @@ public class TaskClass {
     }
     public void setTaskTitle(String task) {
         this.taskTitle = task;
+    }
+    public void setTaskDesc(String desc) {
+        this.taskDesc = desc;
     }
     public void setTaskYear(int year) {
         this.taskYear = year;
@@ -47,12 +57,18 @@ public class TaskClass {
     public void setTaskMinute(int minute) {
         this.taskMinute = minute;
     }
+    public void setTaskStatus(int status) {
+        this.taskStatus = status;
+    }
 
     public int getTaskId() {
         return taskId;
     }
     public String getTaskTitle() {
         return taskTitle;
+    }
+    public String getTaskDesc() {
+        return taskDesc;
     }
     public int getTaskYear() {
         return taskYear;
@@ -68,6 +84,9 @@ public class TaskClass {
     }
     public int getTaskMinute() {
         return taskMinute;
+    }
+    public int getTaskStatus() {
+        return taskStatus;
     }
 
 }

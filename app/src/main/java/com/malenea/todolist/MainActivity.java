@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +33,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -116,14 +119,33 @@ public class MainActivity extends AppCompatActivity {
         TextView tx_time = (TextView) promptView.findViewById(R.id.popup_txtTime);
         tx_time.setTypeface(custom_font);
 
+        TextView tx_status = (TextView) promptView.findViewById(R.id.popup_status);
+        tx_status.setTypeface(custom_font);
+
+        final EditText tx_desc = (EditText) promptView.findViewById(R.id.popup_desc);
+        tx_desc.setTypeface(custom_font);
+
         tx_title.setText(taskList.get(position).getTaskTitle());
+        tx_desc.setText(taskList.get(position).getTaskDesc());
+
+        if (taskList.get(position).getTaskStatus() == 0) {
+            tx_status.setBackgroundColor(Color.LTGRAY);
+            tx_status.setText("Unknown");
+        } else if (taskList.get(position).getTaskStatus() == 1) {
+            tx_status.setBackgroundColor(Color.RED);
+            tx_status.setText("To be done");
+
+        } else {
+            tx_status.setBackgroundColor(Color.GREEN);
+            tx_status.setText("Done");
+        }
 
         if (taskList.get(position).getTaskYear() == 0 ||
                 taskList.get(position).getTaskMonth() == 0 ||
                 taskList.get(position).getTaskDay() == 0) {
             tx_date.setText("No date set yet.");
         } else {
-            tx_date.setText("This todo task is the : " +
+            tx_date.setText("For the : " +
                     taskList.get(position).getTaskDay() + "/" +
                     taskList.get(position).getTaskMonth() + "/" +
                     taskList.get(position).getTaskYear());
@@ -137,6 +159,28 @@ public class MainActivity extends AppCompatActivity {
                     taskList.get(position).getTaskMinute()));
         }
 
+        tx_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final TextView txtStatus = (TextView) promptView.findViewById(R.id.popup_status);
+
+                if (taskList.get(position).getTaskStatus() == 0) {
+                    taskList.get(position).setTaskStatus(1);
+                    txtStatus.setBackgroundColor(Color.RED);
+                    txtStatus.setText("To be done");
+                } else if (taskList.get(position).getTaskStatus() == 1) {
+                    taskList.get(position).setTaskStatus(2);
+                    txtStatus.setBackgroundColor(Color.GREEN);
+                    txtStatus.setText("Done");
+                } else {
+                    taskList.get(position).setTaskStatus(0);
+                    txtStatus.setBackgroundColor(Color.LTGRAY);
+                    txtStatus.setText("Unknown");
+                }
+            }
+        });
+
         ImageButton btnDel = (ImageButton) promptView.findViewById(R.id.popup_del);
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,8 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Calendar c = Calendar.getInstance();
 
-        ImageButton btnCal = (ImageButton) promptView.findViewById(R.id.popup_cal);
-        btnCal.setOnClickListener(new View.OnClickListener() {
+        tx_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -167,25 +210,20 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view,
                                                   int year, int monthOfYear, int dayOfMonth) {
-                                txtDate.setText("This todo task is the : "
+                                txtDate.setText("For the : "
                                         + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 // Set date on db
-                                TaskClass task = new TaskClass(taskList.get(position));
-                                task.setTaskYear(year);
-                                task.setTaskMonth(monthOfYear + 1);
-                                task.setTaskDay(dayOfMonth);
-                                int ret = dbHelper.updateTask(task);
-                                Log.i(LOG_TAG, "Update returned : " + ret);
+                                taskList.get(position).setTaskYear(year);
+                                taskList.get(position).setTaskMonth(monthOfYear + 1);
+                                taskList.get(position).setTaskDay(dayOfMonth);
                             }
                         }, mYear, mMonth, mDay);
-
                 dateDialog.show();
 
             }
         });
 
-        ImageButton btnTim = (ImageButton) promptView.findViewById(R.id.popup_clock);
-        btnTim.setOnClickListener(new View.OnClickListener() {
+        tx_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -203,13 +241,10 @@ public class MainActivity extends AppCompatActivity {
                                 txtTime.setText(String.format(Locale.US, "At : %02d:%02d",
                                         selectedHour, selectMinute));
                                 // Set time on db
-                                TaskClass task = new TaskClass(taskList.get(position));
-                                task.setTaskHour(selectedHour);
-                                task.setTaskMinute(selectMinute);
-                                dbHelper.updateTask(task);
+                                taskList.get(position).setTaskHour(selectedHour);
+                                taskList.get(position).setTaskMinute(selectMinute);
                             }
                         }, hour, minute, true);
-
                 timeDialog.show();
             }
         });
@@ -218,6 +253,12 @@ public class MainActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String tmp = tx_desc.getText().toString();
+                if (tmp != null) {
+                    taskList.get(position).setTaskDesc(tmp);
+                }
+                int ret = dbHelper.updateTask(taskList.get(position));
+                Log.i(LOG_TAG, "Update returned : " + ret);
                 loadTaskList();
                 dialog.dismiss();
             }
@@ -240,11 +281,13 @@ public class MainActivity extends AppCompatActivity {
                         TaskClass tmp = new TaskClass();
                         String task = String.valueOf(taskEditText.getText());
                         tmp.setTaskTitle(task);
+                        tmp.setTaskDesc("No note associated to this todo task yet.");
                         tmp.setTaskYear(0);
                         tmp.setTaskMonth(0);
                         tmp.setTaskDay(0);
                         tmp.setTaskHour(0);
                         tmp.setTaskMinute(0);
+                        tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());
                         dbHelper.insertNewTask(tmp);
                         loadTaskList();

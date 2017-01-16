@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/page">
+    android:background="@drawable/page"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/popup_txtDate"
@@ -33,6 +34,22 @@
         android:layout_below="@id/popup_txtTime"
         android:layout_margin="@dimen/fab_margin" />
 
+    <EditText
+        android:id="@+id/popup_desc"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:textSize="15sp"
+        android:layout_below="@id/popup_txt"
+        android:background="@drawable/sticky_note_desc"
+        android:scrollbars="vertical"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="40dp"
+        android:selectAllOnFocus="true"
+        android:nextFocusUp="@id/popup_desc"
+        android:nextFocusLeft="@id/popup_desc"/>
+
     <ImageButton
         android:id="@+id/popup_del"
         android:background="@drawable/ic_dltbtn"
@@ -51,23 +68,13 @@
         android:layout_alignParentStart="true"
         android:layout_margin = "@dimen/fab_margin" />
 
-    <ImageButton
-        android:id="@+id/popup_clock"
-        android:background="@drawable/ic_timbtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/popup_cal"
-        android:layout_toStartOf="@+id/popup_del" />
-
-    <ImageButton
-        android:id="@+id/popup_cal"
-        android:background="@drawable/ic_calbtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginBottom="19dp"
-        android:layout_alignBottom="@+id/popup_back"
-        android:layout_toEndOf="@+id/popup_back" />
+    <TextView
+        android:id="@+id/popup_status"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignBottom="@+id/popup_txtTime"
+        android:layout_alignEnd="@+id/popup_del"
+        android:layout_marginEnd="15dp"
+        android:gravity="center" />
 
 </RelativeLayout>

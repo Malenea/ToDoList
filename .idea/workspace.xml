@@ -22,7 +22,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/DbHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/DbHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MyRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MyRecyclerViewAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskClass.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskClass.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/popup.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/popup.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="ToDoList.iws" />
@@ -59,38 +61,28 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="648">
+              <caret line="139" column="38" selection-start-line="139" selection-start-column="38" selection-end-line="139" selection-end-column="38" />
               <folding>
-                <element signature="e#2964#3282#0" expanded="true" />
-                <element signature="e#3281#3282#0" expanded="true" />
-                <element signature="e#8771#8772#0" expanded="true" />
-                <marker date="1484508728603" expanded="false" signature="5178:5270" ph="(v) → {" />
-                <marker date="1484508728603" expanded="false" signature="5361:5376" ph="}" />
-                <marker date="1484508728603" expanded="false" signature="5550:5642" ph="(v) → {" />
-                <marker date="1484508728603" expanded="false" signature="6041:6284" ph="(view, year, monthOfYear, dayOfMonth) → {" />
-                <marker date="1484508728603" expanded="false" signature="6946:6977" ph="}" />
-                <marker date="1484508728603" expanded="false" signature="7046:7061" ph="}" />
-                <marker date="1484508728603" expanded="false" signature="7185:7277" ph="(v) → {" />
-                <marker date="1484508728603" expanded="false" signature="7597:7839" ph="(timePicker, selectedHour, selectMinute) → {" />
-                <marker date="1484508728603" expanded="false" signature="8352:8383" ph="}" />
-                <marker date="1484508728603" expanded="false" signature="8450:8465" ph="}" />
-                <marker date="1484508728603" expanded="false" signature="8590:8682" ph="(v) → { " />
-                <marker date="1484508728603" expanded="false" signature="8748:8772" ph=" }" />
-                <marker date="1484508728603" expanded="false" signature="9250:9396" ph="(dialog, which) → {" />
-                <marker date="1484508728603" expanded="false" signature="9995:10018" ph="}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyRecyclerViewAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MyRecyclerViewAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#3062#3380#0" expanded="true" />
+                <element signature="e#3379#3380#0" expanded="true" />
+                <element signature="e#5946#6867#0" expanded="true" />
+                <element signature="e#6866#6867#0" expanded="true" />
+                <element signature="e#10412#10413#0" expanded="true" />
+                <marker date="1484548291389" expanded="false" signature="6989:7081" ph="(v) → {" />
+                <marker date="1484548291389" expanded="false" signature="7172:7187" ph="}" />
+                <marker date="1484548291389" expanded="true" signature="7278:7370" ph="(v) → {" />
+                <marker date="1484548291389" expanded="false" signature="7769:8012" ph="(view, year, monthOfYear, dayOfMonth) → {" />
+                <marker date="1484548291389" expanded="false" signature="8481:8512" ph="}" />
+                <marker date="1484548291389" expanded="false" signature="8580:8595" ph="}" />
+                <marker date="1484548291389" expanded="false" signature="8634:8726" ph="(v) → {" />
+                <marker date="1484548291389" expanded="false" signature="9046:9288" ph="(timePicker, selectedHour, selectMinute) → {" />
+                <marker date="1484548291389" expanded="false" signature="9690:9721" ph="}" />
+                <marker date="1484548291389" expanded="false" signature="9787:9802" ph="}" />
+                <marker date="1484548291389" expanded="false" signature="9927:10019" ph="(v) → { " />
+                <marker date="1484548291389" expanded="false" signature="10389:10413" ph=" }" />
+                <marker date="1484548291389" expanded="false" signature="10891:11037" ph="(dialog, which) → {" />
+                <marker date="1484548291389" expanded="false" signature="11768:11791" ph="}" />
               </folding>
             </state>
           </provider>
@@ -1824,13 +1816,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskClass.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/DbHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/row.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskClass.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/DbHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/popup.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MyRecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -1927,6 +1919,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ToDoList" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2365,7 +2375,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -2399,23 +2409,25 @@
         <state relative-caret-position="684">
           <caret line="82" column="22" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="22" />
           <folding>
-            <element signature="e#2964#3282#0" expanded="true" />
-            <element signature="e#3281#3282#0" expanded="true" />
-            <element signature="e#8771#8772#0" expanded="true" />
-            <marker date="1484508728603" expanded="false" signature="5178:5270" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="5361:5376" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="5550:5642" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="6041:6284" ph="(view, year, monthOfYear, dayOfMonth) → {" />
-            <marker date="1484508728603" expanded="false" signature="6946:6977" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7046:7061" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7185:7277" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="7597:7839" ph="(timePicker, selectedHour, selectMinute) → {" />
-            <marker date="1484508728603" expanded="false" signature="8352:8383" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8450:8465" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8590:8682" ph="(v) → { " />
-            <marker date="1484508728603" expanded="false" signature="8748:8772" ph=" }" />
-            <marker date="1484508728603" expanded="false" signature="9250:9396" ph="(dialog, which) → {" />
-            <marker date="1484508728603" expanded="false" signature="9995:10018" ph="}" />
+            <element signature="e#3062#3380#0" expanded="true" />
+            <element signature="e#3379#3380#0" expanded="true" />
+            <element signature="e#5946#6867#0" expanded="true" />
+            <element signature="e#6866#6867#0" expanded="true" />
+            <element signature="e#10412#10413#0" expanded="true" />
+            <marker date="1484548291389" expanded="false" signature="6989:7081" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7172:7187" ph="}" />
+            <marker date="1484548291389" expanded="true" signature="7278:7370" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7769:8012" ph="(view, year, monthOfYear, dayOfMonth) → {" />
+            <marker date="1484548291389" expanded="false" signature="8481:8512" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8580:8595" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8634:8726" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="9046:9288" ph="(timePicker, selectedHour, selectMinute) → {" />
+            <marker date="1484548291389" expanded="false" signature="9690:9721" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9787:9802" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9927:10019" ph="(v) → { " />
+            <marker date="1484548291389" expanded="false" signature="10389:10413" ph=" }" />
+            <marker date="1484548291389" expanded="false" signature="10891:11037" ph="(dialog, which) → {" />
+            <marker date="1484548291389" expanded="false" signature="11768:11791" ph="}" />
           </folding>
         </state>
       </provider>
@@ -2447,23 +2459,25 @@
         <state relative-caret-position="2322">
           <caret line="171" column="5" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
           <folding>
-            <element signature="e#2964#3282#0" expanded="true" />
-            <element signature="e#3281#3282#0" expanded="true" />
-            <element signature="e#8771#8772#0" expanded="true" />
-            <marker date="1484508728603" expanded="false" signature="5178:5270" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="5361:5376" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="5550:5642" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="6041:6284" ph="(view, year, monthOfYear, dayOfMonth) → {" />
-            <marker date="1484508728603" expanded="false" signature="6946:6977" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7046:7061" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7185:7277" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="7597:7839" ph="(timePicker, selectedHour, selectMinute) → {" />
-            <marker date="1484508728603" expanded="false" signature="8352:8383" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8450:8465" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8590:8682" ph="(v) → { " />
-            <marker date="1484508728603" expanded="false" signature="8748:8772" ph=" }" />
-            <marker date="1484508728603" expanded="false" signature="9250:9396" ph="(dialog, which) → {" />
-            <marker date="1484508728603" expanded="false" signature="9995:10018" ph="}" />
+            <element signature="e#3062#3380#0" expanded="true" />
+            <element signature="e#3379#3380#0" expanded="true" />
+            <element signature="e#5946#6867#0" expanded="true" />
+            <element signature="e#6866#6867#0" expanded="true" />
+            <element signature="e#10412#10413#0" expanded="true" />
+            <marker date="1484548291389" expanded="false" signature="6989:7081" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7172:7187" ph="}" />
+            <marker date="1484548291389" expanded="true" signature="7278:7370" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7769:8012" ph="(view, year, monthOfYear, dayOfMonth) → {" />
+            <marker date="1484548291389" expanded="false" signature="8481:8512" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8580:8595" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8634:8726" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="9046:9288" ph="(timePicker, selectedHour, selectMinute) → {" />
+            <marker date="1484548291389" expanded="false" signature="9690:9721" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9787:9802" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9927:10019" ph="(v) → { " />
+            <marker date="1484548291389" expanded="false" signature="10389:10413" ph=" }" />
+            <marker date="1484548291389" expanded="false" signature="10891:11037" ph="(dialog, which) → {" />
+            <marker date="1484548291389" expanded="false" signature="11768:11791" ph="}" />
           </folding>
         </state>
       </provider>
@@ -2493,23 +2507,25 @@
         <state relative-caret-position="2322">
           <caret line="171" column="5" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
           <folding>
-            <element signature="e#2964#3282#0" expanded="true" />
-            <element signature="e#3281#3282#0" expanded="true" />
-            <element signature="e#8771#8772#0" expanded="true" />
-            <marker date="1484508728603" expanded="false" signature="5178:5270" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="5361:5376" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="5550:5642" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="6041:6284" ph="(view, year, monthOfYear, dayOfMonth) → {" />
-            <marker date="1484508728603" expanded="false" signature="6946:6977" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7046:7061" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7185:7277" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="7597:7839" ph="(timePicker, selectedHour, selectMinute) → {" />
-            <marker date="1484508728603" expanded="false" signature="8352:8383" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8450:8465" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8590:8682" ph="(v) → { " />
-            <marker date="1484508728603" expanded="false" signature="8748:8772" ph=" }" />
-            <marker date="1484508728603" expanded="false" signature="9250:9396" ph="(dialog, which) → {" />
-            <marker date="1484508728603" expanded="false" signature="9995:10018" ph="}" />
+            <element signature="e#3062#3380#0" expanded="true" />
+            <element signature="e#3379#3380#0" expanded="true" />
+            <element signature="e#5946#6867#0" expanded="true" />
+            <element signature="e#6866#6867#0" expanded="true" />
+            <element signature="e#10412#10413#0" expanded="true" />
+            <marker date="1484548291389" expanded="false" signature="6989:7081" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7172:7187" ph="}" />
+            <marker date="1484548291389" expanded="true" signature="7278:7370" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7769:8012" ph="(view, year, monthOfYear, dayOfMonth) → {" />
+            <marker date="1484548291389" expanded="false" signature="8481:8512" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8580:8595" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8634:8726" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="9046:9288" ph="(timePicker, selectedHour, selectMinute) → {" />
+            <marker date="1484548291389" expanded="false" signature="9690:9721" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9787:9802" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9927:10019" ph="(v) → { " />
+            <marker date="1484548291389" expanded="false" signature="10389:10413" ph=" }" />
+            <marker date="1484548291389" expanded="false" signature="10891:11037" ph="(dialog, which) → {" />
+            <marker date="1484548291389" expanded="false" signature="11768:11791" ph="}" />
           </folding>
         </state>
       </provider>
@@ -2552,44 +2568,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskListActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/DbHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -2598,10 +2576,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+          <folding>
+            <element signature="e#1311#1330#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/DbHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="76" column="55" selection-start-line="76" selection-start-column="55" selection-end-line="76" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/TaskClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="33" column="52" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
+        <state relative-caret-position="754">
+          <caret line="50" column="45" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -2611,8 +2629,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MyRecyclerViewAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="632">
+          <caret line="88" column="44" selection-start-line="88" selection-start-column="44" selection-end-line="88" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2621,26 +2639,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/malenea/todolist/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="648">
+          <caret line="139" column="38" selection-start-line="139" selection-start-column="38" selection-end-line="139" selection-end-column="38" />
           <folding>
-            <element signature="e#2964#3282#0" expanded="true" />
-            <element signature="e#3281#3282#0" expanded="true" />
-            <element signature="e#8771#8772#0" expanded="true" />
-            <marker date="1484508728603" expanded="false" signature="5178:5270" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="5361:5376" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="5550:5642" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="6041:6284" ph="(view, year, monthOfYear, dayOfMonth) → {" />
-            <marker date="1484508728603" expanded="false" signature="6946:6977" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7046:7061" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="7185:7277" ph="(v) → {" />
-            <marker date="1484508728603" expanded="false" signature="7597:7839" ph="(timePicker, selectedHour, selectMinute) → {" />
-            <marker date="1484508728603" expanded="false" signature="8352:8383" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8450:8465" ph="}" />
-            <marker date="1484508728603" expanded="false" signature="8590:8682" ph="(v) → { " />
-            <marker date="1484508728603" expanded="false" signature="8748:8772" ph=" }" />
-            <marker date="1484508728603" expanded="false" signature="9250:9396" ph="(dialog, which) → {" />
-            <marker date="1484508728603" expanded="false" signature="9995:10018" ph="}" />
+            <element signature="e#3062#3380#0" expanded="true" />
+            <element signature="e#3379#3380#0" expanded="true" />
+            <element signature="e#5946#6867#0" expanded="true" />
+            <element signature="e#6866#6867#0" expanded="true" />
+            <element signature="e#10412#10413#0" expanded="true" />
+            <marker date="1484548291389" expanded="false" signature="6989:7081" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7172:7187" ph="}" />
+            <marker date="1484548291389" expanded="true" signature="7278:7370" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="7769:8012" ph="(view, year, monthOfYear, dayOfMonth) → {" />
+            <marker date="1484548291389" expanded="false" signature="8481:8512" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8580:8595" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="8634:8726" ph="(v) → {" />
+            <marker date="1484548291389" expanded="false" signature="9046:9288" ph="(timePicker, selectedHour, selectMinute) → {" />
+            <marker date="1484548291389" expanded="false" signature="9690:9721" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9787:9802" ph="}" />
+            <marker date="1484548291389" expanded="false" signature="9927:10019" ph="(v) → { " />
+            <marker date="1484548291389" expanded="false" signature="10389:10413" ph=" }" />
+            <marker date="1484548291389" expanded="false" signature="10891:11037" ph="(dialog, which) → {" />
+            <marker date="1484548291389" expanded="false" signature="11768:11791" ph="}" />
           </folding>
         </state>
       </provider>
