@@ -28,6 +28,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_COLUMN_HOUR="TaskHour";
     public static final String DB_COLUMN_MINUTE="TaskMinute";
 
+    public static final String DB_COLUMN_CATEGORY="TaskCategory";
     public static final String DB_COLUMN_STATUS="TaskStatus";
 
     private static String LOG_TAG = "dbHelper";
@@ -47,6 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 DB_COLUMN_DAY + " INTEGER, " +
                 DB_COLUMN_HOUR + " INTEGER, " +
                 DB_COLUMN_MINUTE + " INTEGER, " +
+                DB_COLUMN_CATEGORY + " INTEGER, " +
                 DB_COLUMN_STATUS + " INTEGER" +
                 ")";
         db.execSQL(createTable);
@@ -68,6 +70,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DB_COLUMN_DAY, task.getTaskDay());
         values.put(DB_COLUMN_HOUR, task.getTaskHour());
         values.put(DB_COLUMN_MINUTE, task.getTaskMinute());
+        values.put(DB_COLUMN_CATEGORY, task.getTaskCat());
         values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         db.insert(DB_TABLE, null, values);
         db.close();
@@ -90,6 +93,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DB_COLUMN_DAY, task.getTaskDay());
         values.put(DB_COLUMN_HOUR, task.getTaskHour());
         values.put(DB_COLUMN_MINUTE, task.getTaskMinute());
+        values.put(DB_COLUMN_CATEGORY, task.getTaskCat());
         values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         Log.i(LOG_TAG, "Updating id : " + task.getTaskId());
         return db.update(DB_TABLE, values, DB_ID + " = " + task.getTaskId(), null);
@@ -112,6 +116,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 task.setTaskDay(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_DAY)));
                 task.setTaskHour(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_HOUR)));
                 task.setTaskMinute(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MINUTE)));
+                task.setTaskCat(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_CATEGORY)));
                 task.setTaskStatus(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_STATUS)));
                 taskList.add(task);
             } while (cursor.moveToNext());

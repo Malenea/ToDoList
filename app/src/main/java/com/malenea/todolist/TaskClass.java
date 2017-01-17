@@ -16,6 +16,8 @@ public class TaskClass {
     private int taskHour;
     private int taskMinute;
 
+    private int taskCat;
+
     private int taskStatus;
 
     TaskClass() {
@@ -30,6 +32,7 @@ public class TaskClass {
         this.taskDay = task.getTaskDay();
         this.taskHour = task.getTaskHour();
         this.taskMinute = task.getTaskMinute();
+        this.taskCat = task.getTaskCat();
         this.taskStatus = task.getTaskStatus();
     }
 
@@ -56,6 +59,9 @@ public class TaskClass {
     }
     public void setTaskMinute(int minute) {
         this.taskMinute = minute;
+    }
+    public void setTaskCat(int cat) {
+        this.taskCat = cat;
     }
     public void setTaskStatus(int status) {
         this.taskStatus = status;
@@ -84,6 +90,9 @@ public class TaskClass {
     }
     public int getTaskMinute() {
         return taskMinute;
+    }
+    public int getTaskCat() {
+        return taskCat;
     }
     public int getTaskStatus() {
         return taskStatus;

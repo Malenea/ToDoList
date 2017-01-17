@@ -74,6 +74,18 @@
         android:layout_height="80dp"
         android:gravity="center"
         android:layout_alignBottom="@+id/popup_txtTime"
-        android:layout_alignEnd="@+id/popup_del" />
+        android:layout_alignEnd="@+id/popup_del"
+        android:background="@drawable/sticky_note_status"/>
+
+    <TextView
+        android:id="@+id/popup_cat"
+        android:text="@string/example"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:background="@drawable/sticky_note"
+        android:layout_below="@+id/popup_status"
+        android:layout_marginTop="5dp"
+        android:layout_alignEnd="@+id/popup_status" />
 
 </RelativeLayout>

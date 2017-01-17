@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
         TextView tx_status = (TextView) promptView.findViewById(R.id.popup_status);
         tx_status.setTypeface(custom_font);
 
+        TextView tx_cat = (TextView) promptView.findViewById(R.id.popup_cat);
+        tx_cat.setTypeface(custom_font);
+
         final EditText tx_desc = (EditText) promptView.findViewById(R.id.popup_desc);
         tx_desc.setTypeface(custom_font);
 
@@ -129,20 +132,36 @@ public class MainActivity extends AppCompatActivity {
         tx_desc.setText(taskList.get(position).getTaskDesc());
 
         if (taskList.get(position).getTaskStatus() == 0) {
-            tx_status.setBackgroundColor(Color.LTGRAY);
+            tx_status.setTextColor(Color.BLACK);
             tx_status.setText("Unknown");
         } else if (taskList.get(position).getTaskStatus() == 1) {
-            tx_status.setBackgroundColor(Color.RED);
+            tx_status.setTextColor(Color.RED);
             tx_status.setText("To be done");
-
         } else {
-            tx_status.setBackgroundColor(Color.GREEN);
+            tx_status.setTextColor(Color.GREEN);
             tx_status.setText("Done");
         }
 
-        if (taskList.get(position).getTaskYear() == 0 ||
-                taskList.get(position).getTaskMonth() == 0 ||
-                taskList.get(position).getTaskDay() == 0) {
+        if (taskList.get(position).getTaskCat() == 0) {
+            tx_cat.setTextColor(Color.BLACK);
+            tx_cat.setText("?");
+        } else if (taskList.get(position).getTaskCat() == 1) {
+            tx_cat.setTextColor(Color.RED);
+            tx_cat.setText("Work");
+        } else if (taskList.get(position).getTaskCat() == 2) {
+            tx_cat.setTextColor(Color.BLUE);
+            tx_cat.setText("Perso");
+        } else if (taskList.get(position).getTaskCat() == 3) {
+            tx_cat.setTextColor(Color.CYAN);
+            tx_cat.setText("Errands");
+        } else {
+            tx_cat.setTextColor(Color.GREEN);
+            tx_cat.setText("Hobbies");
+        }
+
+        if (taskList.get(position).getTaskYear() == -1 ||
+                taskList.get(position).getTaskMonth() == -1 ||
+                taskList.get(position).getTaskDay() == -1) {
             tx_date.setText("No date set yet.");
         } else {
             tx_date.setText("For the : " +
@@ -150,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
                     taskList.get(position).getTaskMonth() + "/" +
                     taskList.get(position).getTaskYear());
         }
-        if (taskList.get(position).getTaskHour() == 0 ||
-                taskList.get(position).getTaskMinute() == 0) {
+        if (taskList.get(position).getTaskHour() == -1 ||
+                taskList.get(position).getTaskMinute() == -1) {
             tx_time.setText("No time set yet.");
         } else {
             tx_time.setText(String.format(Locale.US, "At : %02d:%02d",
@@ -167,16 +186,46 @@ public class MainActivity extends AppCompatActivity {
 
                 if (taskList.get(position).getTaskStatus() == 0) {
                     taskList.get(position).setTaskStatus(1);
-                    txtStatus.setBackgroundColor(Color.RED);
+                    txtStatus.setTextColor(Color.RED);
                     txtStatus.setText("To be done");
                 } else if (taskList.get(position).getTaskStatus() == 1) {
                     taskList.get(position).setTaskStatus(2);
-                    txtStatus.setBackgroundColor(Color.GREEN);
+                    txtStatus.setTextColor(Color.GREEN);
                     txtStatus.setText("Done");
                 } else {
                     taskList.get(position).setTaskStatus(0);
-                    txtStatus.setBackgroundColor(Color.LTGRAY);
+                    txtStatus.setTextColor(Color.BLACK);
                     txtStatus.setText("Unknown");
+                }
+            }
+        });
+
+        tx_cat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final TextView txtCat = (TextView) promptView.findViewById(R.id.popup_cat);
+
+                if (taskList.get(position).getTaskCat() == 0) {
+                    taskList.get(position).setTaskCat(1);
+                    txtCat.setTextColor(Color.RED);
+                    txtCat.setText("Work");
+                } else if (taskList.get(position).getTaskCat() == 1) {
+                    taskList.get(position).setTaskCat(2);
+                    txtCat.setTextColor(Color.BLUE);
+                    txtCat.setText("Perso");
+                } else if (taskList.get(position).getTaskCat() == 2) {
+                    taskList.get(position).setTaskCat(3);
+                    txtCat.setTextColor(Color.CYAN);
+                    txtCat.setText("Errands");
+                } else if (taskList.get(position).getTaskCat() == 3) {
+                    taskList.get(position).setTaskCat(4);
+                    txtCat.setTextColor(Color.GREEN);
+                    txtCat.setText("Hobbies");
+                } else {
+                    taskList.get(position).setTaskCat(0);
+                    txtCat.setTextColor(Color.BLACK);
+                    txtCat.setText("?");
                 }
             }
         });
@@ -282,11 +331,12 @@ public class MainActivity extends AppCompatActivity {
                         String task = String.valueOf(taskEditText.getText());
                         tmp.setTaskTitle(task);
                         tmp.setTaskDesc("No note associated to this todo task yet.");
-                        tmp.setTaskYear(0);
-                        tmp.setTaskMonth(0);
-                        tmp.setTaskDay(0);
-                        tmp.setTaskHour(0);
-                        tmp.setTaskMinute(0);
+                        tmp.setTaskYear(-1);
+                        tmp.setTaskMonth(-1);
+                        tmp.setTaskDay(-1);
+                        tmp.setTaskHour(-1);
+                        tmp.setTaskMinute(-1);
+                        tmp.setTaskCat(0);
                         tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());
                         dbHelper.insertNewTask(tmp);

@@ -31,6 +31,7 @@ public class MyRecyclerViewAdapter extends RecyclerView
         TextView label;
         TextView dateTime;
         TextView statusState;
+        TextView catType;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -39,12 +40,14 @@ public class MyRecyclerViewAdapter extends RecyclerView
             label = (TextView) itemView.findViewById(R.id.row_task_title);
             dateTime = (TextView) itemView.findViewById(R.id.row_task_date);
             statusState = (TextView) itemView.findViewById(R.id.row_task_status);
+            catType = (TextView) itemView.findViewById(R.id.row_task_cat);
 
             Typeface custom_font = Typeface.createFromAsset(context.getAssets(),
                     "fonts/MyFont.otf");
             label.setTypeface(custom_font);
             dateTime.setTypeface(custom_font);
             statusState.setTypeface(custom_font);
+            catType.setTypeface(custom_font);
 
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
@@ -79,19 +82,36 @@ public class MyRecyclerViewAdapter extends RecyclerView
         holder.label.setText(mDataset.get(position).getTaskTitle());
 
         if (mDataset.get(position).getTaskStatus() == 0) {
-            holder.statusState.setBackgroundColor(Color.LTGRAY);
+            holder.statusState.setTextColor(Color.BLACK);
             holder.statusState.setText("?");
         } else if (mDataset.get(position).getTaskStatus() == 1) {
-            holder.statusState.setBackgroundColor(Color.RED);
+            holder.statusState.setTextColor(Color.RED);
             holder.statusState.setText("TBD");
         } else {
-            holder.statusState.setBackgroundColor(Color.GREEN);
+            holder.statusState.setTextColor(Color.GREEN);
             holder.statusState.setText("D");
         }
 
-        if (mDataset.get(position).getTaskDay() == 0 ||
-                mDataset.get(position).getTaskMonth() == 0 ||
-                mDataset.get(position).getTaskYear() == 0) {
+        if (mDataset.get(position).getTaskCat() == 0) {
+            holder.catType.setTextColor(Color.BLACK);
+            holder.catType.setText("?");
+        } else if (mDataset.get(position).getTaskCat() == 1) {
+            holder.catType.setTextColor(Color.RED);
+            holder.catType.setText("Work");
+        } else if (mDataset.get(position).getTaskCat() == 2) {
+            holder.catType.setTextColor(Color.BLUE);
+            holder.catType.setText("Perso");
+        } else if (mDataset.get(position).getTaskCat() == 3) {
+            holder.catType.setTextColor(Color.CYAN);
+            holder.catType.setText("Errands");
+        } else {
+            holder.catType.setTextColor(Color.GREEN);
+            holder.catType.setText("Hobbies");
+        }
+
+        if (mDataset.get(position).getTaskDay() == -1 ||
+                mDataset.get(position).getTaskMonth() == -1 ||
+                mDataset.get(position).getTaskYear() == -1) {
             holder.dateTime.setText("No date set yet.");
         } else {
             holder.dateTime.setText(mDataset.get(position).getTaskDay()

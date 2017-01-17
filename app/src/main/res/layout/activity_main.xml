@@ -35,4 +35,13 @@
         android:layout_margin="@dimen/fab_margin"
         android:onClick="addTask" />
 
+    <ImageButton
+        android:id="@+id/search"
+        android:background="@drawable/ic_srchbtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:onClick="addTask" />
+
 </android.support.design.widget.CoordinatorLayout>
