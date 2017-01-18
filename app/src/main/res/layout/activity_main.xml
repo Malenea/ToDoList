@@ -23,7 +23,7 @@
         android:scrollbars="vertical"
         android:layout_marginTop="70sp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="397dp"
         android:layout_marginBottom="70sp" />
 
     <ImageButton
@@ -35,13 +35,50 @@
         android:layout_margin="@dimen/fab_margin"
         android:onClick="addTask" />
 
-    <ImageButton
+    <TextView
         android:id="@+id/search"
-        android:background="@drawable/ic_srchbtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:text="Showing"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
-        android:onClick="addTask" />
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/status_state"
+        android:text="STA"
+        android:textSize="15sp"
+        android:layout_marginBottom="27dp"
+        android:layout_marginStart="95dp"
+        android:gravity="center"
+        android:layout_gravity="bottom|start"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/sticky_note"
+        android:onClick="changeStatValue"/>
+
+    <TextView
+        android:id="@+id/from"
+        android:textSize="20sp"
+        android:text="from"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="170dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/cat_state"
+        android:textSize="15sp"
+        android:text="CAT"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="220dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/sticky_note"
+        android:gravity="center"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:onClick="changeCatValue"/>
 
 </android.support.design.widget.CoordinatorLayout>

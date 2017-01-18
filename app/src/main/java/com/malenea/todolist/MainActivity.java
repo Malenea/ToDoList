@@ -59,32 +59,75 @@ public class MainActivity extends AppCompatActivity {
 
     private static ArrayList<TaskClass> listHandler;
 
+    private static int cat_state_choice = 0;
+    private static int status_state_choice = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tx = (TextView) findViewById(R.id.program_title);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/MyFont.otf");
+
+        TextView tx = (TextView) findViewById(R.id.program_title);
         tx.setTypeface(custom_font);
 
-        dbHelper = new DbHelper(this);
-        loadTaskList();
+        TextView tx_stat = (TextView) findViewById(R.id.status_state);
+        tx_stat.setTypeface(custom_font);
+        if (status_state_choice == 0) {
+            tx_stat.setTextColor(Color.GRAY);
+            tx_stat.setText("All");
+        } else if (status_state_choice == 1) {
+            tx_stat.setTextColor(Color.BLACK);
+            tx_stat.setText("?");
+        } else if (status_state_choice == 2) {
+            tx_stat.setTextColor(Color.RED);
+            tx_stat.setText("TBD");
+        } else {
+            tx_stat.setTextColor(Color.GREEN);
+            tx_stat.setText("Done");
+        }
 
+        TextView tx_cat = (TextView) findViewById(R.id.cat_state);
+        tx_cat.setTypeface(custom_font);
+        if (cat_state_choice == 0) {
+            tx_cat.setTextColor(Color.GRAY);
+            tx_cat.setText("All");
+        } else if (cat_state_choice == 1) {
+            tx_cat.setTextColor(Color.BLACK);
+            tx_cat.setText("?");
+        } else if (cat_state_choice == 2) {
+            tx_cat.setTextColor(Color.RED);
+            tx_cat.setText("Work");
+        } else if (cat_state_choice == 3) {
+            tx_cat.setTextColor(Color.BLUE);
+            tx_cat.setText("Perso");
+        } else if (cat_state_choice == 4) {
+            tx_cat.setTextColor(Color.CYAN);
+            tx_cat.setText("Errands");
+        } else {
+            tx_cat.setTextColor(Color.GREEN);
+            tx_cat.setText("Hobbies");
+        }
+
+        dbHelper = new DbHelper(this);
+        loadTaskList(status_state_choice, cat_state_choice);
     }
 
-    private void loadTaskList() {
+    private void loadTaskList(int stat, int cat) {
         mRecyclerView = (RecyclerView) findViewById(R.id.listTask);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MyRecyclerViewAdapter(getDataSet());
-        listHandler = new ArrayList<>(getDataSet());
+
+        mAdapter = new MyRecyclerViewAdapter(getDataSet(stat, cat));
+        listHandler = new ArrayList<>(getDataSet(stat, cat));
+
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private ArrayList<TaskClass> getDataSet() {
-        ArrayList<TaskClass> results = dbHelper.getTaskList();
+    private ArrayList<TaskClass> getDataSet(int stat, int cat) {
+        ArrayList<TaskClass> results = dbHelper.getTaskList(stat, cat);
         return results;
     }
 
@@ -155,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             tx_cat.setTextColor(Color.CYAN);
             tx_cat.setText("Errands");
         } else {
-            tx_cat.setTextColor(Color.GREEN);
+            tx_cat.setTextColor(Color.MAGENTA);
             tx_cat.setText("Hobbies");
         }
 
@@ -308,13 +351,66 @@ public class MainActivity extends AppCompatActivity {
                 }
                 int ret = dbHelper.updateTask(taskList.get(position));
                 Log.i(LOG_TAG, "Update returned : " + ret);
-                loadTaskList();
+                loadTaskList(status_state_choice, cat_state_choice);
                 dialog.dismiss();
             }
         });
 
         dialog.setView(promptView);
         dialog.show();
+    }
+
+    public void changeStatValue(View view) {
+        TextView tx_stat = (TextView) findViewById(R.id.status_state);
+        if (status_state_choice == 0) {
+            status_state_choice = 1;
+            tx_stat.setTextColor(Color.BLACK);
+            tx_stat.setText("?");
+        } else if (status_state_choice == 1) {
+            status_state_choice = 2;
+            tx_stat.setTextColor(Color.RED);
+            tx_stat.setText("TBD");
+        } else if (status_state_choice == 2) {
+            status_state_choice = 3;
+            tx_stat.setTextColor(Color.GREEN);
+            tx_stat.setText("Done");
+        } else {
+            status_state_choice = 0;
+            tx_stat.setTextColor(Color.GRAY);
+            tx_stat.setText("All");
+        }
+        loadTaskList(status_state_choice, cat_state_choice);
+    }
+
+    // Change the search value for put
+    public void changeCatValue(View view) {
+        TextView tx_cat = (TextView) findViewById(R.id.cat_state);
+        if (cat_state_choice == 0) {
+            cat_state_choice = 1;
+            tx_cat.setTextColor(Color.BLACK);
+            tx_cat.setText("?");
+        } else if (cat_state_choice == 1) {
+            cat_state_choice = 2;
+            tx_cat.setTextColor(Color.RED);
+            tx_cat.setText("Work");
+        } else if (cat_state_choice == 2) {
+            cat_state_choice = 3;
+            tx_cat.setTextColor(Color.BLUE);
+            tx_cat.setText("Perso");
+        } else if (cat_state_choice == 3) {
+            cat_state_choice = 4;
+            tx_cat.setTextColor(Color.CYAN);
+            tx_cat.setText("Errands");
+        } else if (cat_state_choice == 4) {
+            cat_state_choice = 5;
+            tx_cat.setTextColor(Color.GREEN);
+            tx_cat.setText("Hobbies");
+        } else {
+            cat_state_choice = 0;
+            tx_cat.setTextColor(Color.GRAY);
+            tx_cat.setText("All");
+        }
+        loadTaskList(status_state_choice, cat_state_choice);
     }
 
     // Add a new task to the list and the db by prompting an input window
@@ -340,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
                         tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());
                         dbHelper.insertNewTask(tmp);
-                        loadTaskList();
+                        loadTaskList(status_state_choice, cat_state_choice);
                     }
                 })
                 .setNegativeButton("Cancel", null)
@@ -351,6 +447,6 @@ public class MainActivity extends AppCompatActivity {
     // Delete the current task from list and db
     public void deleteTask(ArrayList<TaskClass> list, int position) {
         dbHelper.deleteTask(list.get(position));
-        loadTaskList();
+        loadTaskList(status_state_choice, cat_state_choice);
     }
 }

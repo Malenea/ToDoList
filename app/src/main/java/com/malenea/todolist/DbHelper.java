@@ -99,9 +99,29 @@ public class DbHelper extends SQLiteOpenHelper {
         return db.update(DB_TABLE, values, DB_ID + " = " + task.getTaskId(), null);
     }
 
-    public ArrayList<TaskClass> getTaskList() {
+    public ArrayList<TaskClass> getTaskList(int stat, int cat) {
         ArrayList<TaskClass> taskList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + DB_TABLE;
+        String selectQuery;
+        if (stat == 0) {
+            if (cat == 0) {
+                selectQuery = "SELECT * FROM " + DB_TABLE;
+            } else {
+                selectQuery = "SELECT * FROM " + DB_TABLE +
+                        " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1);
+            }
+        } else {
+            if (cat == 0) {
+                selectQuery = "SELECT * FROM " + DB_TABLE +
+                        " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1);
+            } else {
+                selectQuery = "SELECT * FROM " + DB_TABLE +
+                        " WHERE " +
+                        DB_COLUMN_CATEGORY + " = " + (cat - 1) +
+                        " AND " +
+                        DB_COLUMN_STATUS + " = " + (stat - 1);
+            }
+        }
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
