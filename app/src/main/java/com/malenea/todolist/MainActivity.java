@@ -502,6 +502,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Add a new task to the list and the db by prompting an input window
     public void addTask(View view) {
+        final TextView tx_info = (TextView) findViewById(R.id.information);
         final EditText taskEditText = new EditText(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Add a todo task")
@@ -523,7 +524,12 @@ public class MainActivity extends AppCompatActivity {
                         tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());
                         dbHelper.insertNewTask(tmp);
-                        loadTaskList(status_state_choice, cat_state_choice, null);
+                        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+                            tx_info.setTextColor(Color.RED);
+                            tx_info.setText("Task list is empty");
+                        } else {
+                            tx_info.setText("");
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", null)
