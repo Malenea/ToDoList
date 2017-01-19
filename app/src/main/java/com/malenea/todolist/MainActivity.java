@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/MyFont.otf");
 
-        TextView tx_title = (TextView) promptView.findViewById(R.id.popup_txt);
+        final TextView tx_title = (TextView) promptView.findViewById(R.id.popup_txt);
         tx_title.setTypeface(custom_font);
 
         TextView tx_date = (TextView) promptView.findViewById(R.id.popup_txtDate);
@@ -172,6 +172,28 @@ public class MainActivity extends AppCompatActivity {
         tx_desc.setTypeface(custom_font);
 
         tx_title.setText(taskList.get(position).getTaskTitle());
+        tx_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText taskEditText = new EditText(v.getContext());
+                final AlertDialog dialog = new AlertDialog.Builder(v.getContext())
+                        .setTitle("Edit the todo task")
+                        .setMessage("What todo task is it ?")
+                        .setView(taskEditText)
+                        .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String task = String.valueOf(taskEditText.getText());
+                                tx_title.setText(task);
+                                taskList.get(position).setTaskTitle(task);
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                dialog.show();
+            }
+        });
+
         tx_desc.setText(taskList.get(position).getTaskDesc());
 
         if (taskList.get(position).getTaskStatus() == 0) {
