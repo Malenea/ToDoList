@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
         TextView tx = (TextView) findViewById(R.id.program_title);
         tx.setTypeface(custom_font);
 
+        TextView tx_info = (TextView) findViewById(R.id.information);
+        tx_info.setTextColor(Color.RED);
+        tx_info.setText("");
+
         TextView tx_stat = (TextView) findViewById(R.id.status_state);
         tx_stat.setTypeface(custom_font);
         if (status_state_choice == 0) {
@@ -111,23 +115,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         dbHelper = new DbHelper(this);
-        loadTaskList(status_state_choice, cat_state_choice);
+        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+            tx_info.setText("Task list is empty");
+        } else {
+            tx_info.setText("");
+        }
     }
 
-    private void loadTaskList(int stat, int cat) {
+    private ArrayList<TaskClass> loadTaskList(int stat, int cat, String search) {
         mRecyclerView = (RecyclerView) findViewById(R.id.listTask);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MyRecyclerViewAdapter(getDataSet(stat, cat));
-        listHandler = new ArrayList<>(getDataSet(stat, cat));
+        mAdapter = new MyRecyclerViewAdapter(getDataSet(stat, cat, search));
+        listHandler = new ArrayList<>(getDataSet(stat, cat, search));
 
         mRecyclerView.setAdapter(mAdapter);
+        return listHandler;
     }
 
-    private ArrayList<TaskClass> getDataSet(int stat, int cat) {
-        ArrayList<TaskClass> results = dbHelper.getTaskList(stat, cat);
+    private ArrayList<TaskClass> getDataSet(int stat, int cat, String search) {
+        ArrayList<TaskClass> results = dbHelper.getTaskList(stat, cat, search);
         return results;
     }
 
@@ -176,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final EditText taskEditText = new EditText(v.getContext());
+                taskEditText.setText(taskList.get(position).getTaskTitle());
                 final AlertDialog dialog = new AlertDialog.Builder(v.getContext())
                         .setTitle("Edit the todo task")
                         .setMessage("What todo task is it ?")
@@ -373,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 int ret = dbHelper.updateTask(taskList.get(position));
                 Log.i(LOG_TAG, "Update returned : " + ret);
-                loadTaskList(status_state_choice, cat_state_choice);
+                loadTaskList(status_state_choice, cat_state_choice, null);
                 dialog.dismiss();
             }
         });
@@ -382,7 +392,51 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    public void searchItem(final View view) {
+        ImageButton srchbtn = (ImageButton) findViewById(R.id.search);
+        srchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final TextView tx_info = (TextView) findViewById(R.id.information);
+                final EditText taskEditText = new EditText(v.getContext());
+                final AlertDialog dialog = new AlertDialog.Builder(v.getContext())
+                        .setTitle("Search for a todo task")
+                        .setMessage("What is the title ?")
+                        .setView(taskEditText)
+                        .setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String task = String.valueOf(taskEditText.getText());
+                                if (loadTaskList(status_state_choice, cat_state_choice,
+                                        task).isEmpty()) {
+                                    tx_info.setTextColor(Color.RED);
+                                    tx_info.setText("Task list is empty");
+                                    tx_info.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            if (loadTaskList(status_state_choice, cat_state_choice,
+                                                    null).isEmpty()) {
+                                                tx_info.setTextColor(Color.RED);
+                                                tx_info.setText("Task list is empty");
+                                            } else {
+                                                tx_info.setText("");
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    tx_info.setText("");
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                dialog.show();
+            }
+        });
+    }
+
     public void changeStatValue(View view) {
+        final TextView tx_info = (TextView) findViewById(R.id.information);
         TextView tx_stat = (TextView) findViewById(R.id.status_state);
         if (status_state_choice == 0) {
             status_state_choice = 1;
@@ -401,11 +455,17 @@ public class MainActivity extends AppCompatActivity {
             tx_stat.setTextColor(Color.GRAY);
             tx_stat.setText("All");
         }
-        loadTaskList(status_state_choice, cat_state_choice);
+        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+            tx_info.setTextColor(Color.RED);
+            tx_info.setText("Task list is empty");
+        } else {
+            tx_info.setText("");
+        }
     }
 
     // Change the search value for put
     public void changeCatValue(View view) {
+        final TextView tx_info = (TextView) findViewById(R.id.information);
         TextView tx_cat = (TextView) findViewById(R.id.cat_state);
         if (cat_state_choice == 0) {
             cat_state_choice = 1;
@@ -432,7 +492,12 @@ public class MainActivity extends AppCompatActivity {
             tx_cat.setTextColor(Color.GRAY);
             tx_cat.setText("All");
         }
-        loadTaskList(status_state_choice, cat_state_choice);
+        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+            tx_info.setTextColor(Color.RED);
+            tx_info.setText("Task list is empty");
+        } else {
+            tx_info.setText("");
+        }
     }
 
     // Add a new task to the list and the db by prompting an input window
@@ -458,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
                         tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());
                         dbHelper.insertNewTask(tmp);
-                        loadTaskList(status_state_choice, cat_state_choice);
+                        loadTaskList(status_state_choice, cat_state_choice, null);
                     }
                 })
                 .setNegativeButton("Cancel", null)
@@ -468,7 +533,13 @@ public class MainActivity extends AppCompatActivity {
 
     // Delete the current task from list and db
     public void deleteTask(ArrayList<TaskClass> list, int position) {
+        final TextView tx_info = (TextView) findViewById(R.id.information);
         dbHelper.deleteTask(list.get(position));
-        loadTaskList(status_state_choice, cat_state_choice);
+        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+            tx_info.setTextColor(Color.RED);
+            tx_info.setText("Task list is empty");
+        } else {
+            tx_info.setText("");
+        }
     }
 }

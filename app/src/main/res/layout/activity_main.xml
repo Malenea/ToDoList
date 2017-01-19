@@ -23,20 +23,38 @@
         android:scrollbars="vertical"
         android:layout_marginTop="70sp"
         android:layout_width="match_parent"
-        android:layout_height="397dp"
+        android:layout_height="396dp"
         android:layout_marginBottom="70sp" />
+
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_marginBottom="70dp"/>
 
     <ImageButton
         android:id="@+id/add"
         android:background="@drawable/ic_addbtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:onClick="addTask" />
 
-    <TextView
+    <ImageButton
         android:id="@+id/search"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/ic_srchbtn"
+        android:onClick="searchItem" />
+
+    <TextView
+        android:id="@+id/showing"
         android:text="Showing"
         android:textSize="20sp"
         android:layout_width="wrap_content"

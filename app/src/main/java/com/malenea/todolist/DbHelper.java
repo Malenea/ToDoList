@@ -99,26 +99,52 @@ public class DbHelper extends SQLiteOpenHelper {
         return db.update(DB_TABLE, values, DB_ID + " = " + task.getTaskId(), null);
     }
 
-    public ArrayList<TaskClass> getTaskList(int stat, int cat) {
+    public ArrayList<TaskClass> getTaskList(int stat, int cat, String search) {
         ArrayList<TaskClass> taskList = new ArrayList<>();
         String selectQuery;
-        if (stat == 0) {
-            if (cat == 0) {
-                selectQuery = "SELECT * FROM " + DB_TABLE;
+        if (search == null) {
+            if (stat == 0) {
+                if (cat == 0) {
+                    selectQuery = "SELECT * FROM " + DB_TABLE;
+                } else {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1);
+                }
             } else {
-                selectQuery = "SELECT * FROM " + DB_TABLE +
-                        " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1);
+                if (cat == 0) {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1);
+                } else {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " +
+                            DB_COLUMN_CATEGORY + " = " + (cat - 1) +
+                            " AND " +
+                            DB_COLUMN_STATUS + " = " + (stat - 1);
+                }
             }
         } else {
-            if (cat == 0) {
-                selectQuery = "SELECT * FROM " + DB_TABLE +
-                        " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1);
+            if (stat == 0) {
+                if (cat == 0) {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"";
+                } else {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1) +
+                            " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"";
+                }
             } else {
-                selectQuery = "SELECT * FROM " + DB_TABLE +
-                        " WHERE " +
-                        DB_COLUMN_CATEGORY + " = " + (cat - 1) +
-                        " AND " +
-                        DB_COLUMN_STATUS + " = " + (stat - 1);
+                if (cat == 0) {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1) +
+                            " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"";
+                } else {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " +
+                            DB_COLUMN_CATEGORY + " = " + (cat - 1) +
+                            " AND " +
+                            DB_COLUMN_STATUS + " = " + (stat - 1) +
+                            " AND " + DB_COLUMN_TITLE + " LIKE\"%" + search + "%\"";
+                }
             }
         }
 
