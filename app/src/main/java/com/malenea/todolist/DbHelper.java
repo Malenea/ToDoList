@@ -25,8 +25,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_COLUMN_YEAR="TaskYear";
     public static final String DB_COLUMN_MONTH="TaskMonth";
     public static final String DB_COLUMN_DAY="TaskDay";
-    public static final String DB_COLUMN_HOUR="TaskHour";
-    public static final String DB_COLUMN_MINUTE="TaskMinute";
+    public static final String DB_COLUMN_HOUR_BEGIN="TaskHourBegin";
+    public static final String DB_COLUMN_MINUTE_BEGIN="TaskMinuteBegin";
+    public static final String DB_COLUMN_HOUR_END="TaskHourEnd";
+    public static final String DB_COLUMN_MINUTE_END="TaskMinuteEnd";
 
     public static final String DB_COLUMN_CATEGORY="TaskCategory";
     public static final String DB_COLUMN_STATUS="TaskStatus";
@@ -46,8 +48,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 DB_COLUMN_YEAR + " INTEGER, " +
                 DB_COLUMN_MONTH + " INTEGER, " +
                 DB_COLUMN_DAY + " INTEGER, " +
-                DB_COLUMN_HOUR + " INTEGER, " +
-                DB_COLUMN_MINUTE + " INTEGER, " +
+                DB_COLUMN_HOUR_BEGIN + " INTEGER, " +
+                DB_COLUMN_MINUTE_BEGIN + " INTEGER, " +
+                DB_COLUMN_HOUR_END + " INTEGER, " +
+                DB_COLUMN_MINUTE_END + " INTEGER, " +
                 DB_COLUMN_CATEGORY + " INTEGER, " +
                 DB_COLUMN_STATUS + " INTEGER" +
                 ")";
@@ -68,8 +72,10 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DB_COLUMN_YEAR, task.getTaskYear());
         values.put(DB_COLUMN_MONTH, task.getTaskMonth());
         values.put(DB_COLUMN_DAY, task.getTaskDay());
-        values.put(DB_COLUMN_HOUR, task.getTaskHour());
-        values.put(DB_COLUMN_MINUTE, task.getTaskMinute());
+        values.put(DB_COLUMN_HOUR_BEGIN, task.getTaskHourBegin());
+        values.put(DB_COLUMN_MINUTE_BEGIN, task.getTaskMinuteBegin());
+        values.put(DB_COLUMN_HOUR_END, task.getTaskHourEnd());
+        values.put(DB_COLUMN_MINUTE_END, task.getTaskMinuteEnd());
         values.put(DB_COLUMN_CATEGORY, task.getTaskCat());
         values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         db.insert(DB_TABLE, null, values);
@@ -91,8 +97,10 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DB_COLUMN_YEAR, task.getTaskYear());
         values.put(DB_COLUMN_MONTH, task.getTaskMonth());
         values.put(DB_COLUMN_DAY, task.getTaskDay());
-        values.put(DB_COLUMN_HOUR, task.getTaskHour());
-        values.put(DB_COLUMN_MINUTE, task.getTaskMinute());
+        values.put(DB_COLUMN_HOUR_BEGIN, task.getTaskHourBegin());
+        values.put(DB_COLUMN_MINUTE_BEGIN, task.getTaskMinuteBegin());
+        values.put(DB_COLUMN_HOUR_END, task.getTaskHourEnd());
+        values.put(DB_COLUMN_MINUTE_END, task.getTaskMinuteEnd());
         values.put(DB_COLUMN_CATEGORY, task.getTaskCat());
         values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         Log.i(LOG_TAG, "Updating id : " + task.getTaskId());
@@ -160,8 +168,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 task.setTaskYear(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_YEAR)));
                 task.setTaskMonth(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MONTH)));
                 task.setTaskDay(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_DAY)));
-                task.setTaskHour(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_HOUR)));
-                task.setTaskMinute(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MINUTE)));
+                task.setTaskHourBegin(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_HOUR_BEGIN)));
+                task.setTaskMinuteBegin(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MINUTE_BEGIN)));
+                task.setTaskHourEnd(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_HOUR_END)));
+                task.setTaskMinuteEnd(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MINUTE_END)));
                 task.setTaskCat(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_CATEGORY)));
                 task.setTaskStatus(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_STATUS)));
                 taskList.add(task);

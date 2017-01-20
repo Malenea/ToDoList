@@ -168,8 +168,14 @@ public class MainActivity extends AppCompatActivity {
         TextView tx_date = (TextView) promptView.findViewById(R.id.popup_txtDate);
         tx_date.setTypeface(custom_font);
 
-        TextView tx_time = (TextView) promptView.findViewById(R.id.popup_txtTime);
-        tx_time.setTypeface(custom_font);
+        TextView tx_at = (TextView) promptView.findViewById(R.id.text_at);
+        tx_at.setTypeface(custom_font);
+        TextView tx_time_begin = (TextView) promptView.findViewById(R.id.popup_txtTime_Begin);
+        tx_time_begin.setTypeface(custom_font);
+        TextView tx_to = (TextView) promptView.findViewById(R.id.text_to);
+        tx_to.setTypeface(custom_font);
+        TextView tx_time_end = (TextView) promptView.findViewById(R.id.popup_txtTime_End);
+        tx_time_end.setTypeface(custom_font);
 
         TextView tx_status = (TextView) promptView.findViewById(R.id.popup_status);
         tx_status.setTypeface(custom_font);
@@ -244,13 +250,21 @@ public class MainActivity extends AppCompatActivity {
                     taskList.get(position).getTaskMonth() + "/" +
                     taskList.get(position).getTaskYear());
         }
-        if (taskList.get(position).getTaskHour() == -1 ||
-                taskList.get(position).getTaskMinute() == -1) {
-            tx_time.setText("No time set yet.");
+        if (taskList.get(position).getTaskHourBegin() == -1 ||
+                taskList.get(position).getTaskMinuteBegin() == -1) {
+            tx_time_begin.setText("??:??");
         } else {
-            tx_time.setText(String.format(Locale.US, "At : %02d:%02d",
-                    taskList.get(position).getTaskHour(),
-                    taskList.get(position).getTaskMinute()));
+            tx_time_begin.setText(String.format(Locale.US, "%02d:%02d",
+                    taskList.get(position).getTaskHourBegin(),
+                    taskList.get(position).getTaskMinuteBegin()));
+        }
+        if (taskList.get(position).getTaskHourEnd() == -1 ||
+                taskList.get(position).getTaskMinuteEnd() == -1) {
+            tx_time_end.setText("??:??");
+        } else {
+            tx_time_end.setText(String.format(Locale.US, "%02d:%02d",
+                    taskList.get(position).getTaskHourEnd(),
+                    taskList.get(position).getTaskMinuteEnd()));
         }
 
         tx_status.setOnClickListener(new View.OnClickListener() {
@@ -347,11 +361,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tx_time.setOnClickListener(new View.OnClickListener() {
+        tx_time_begin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final TextView txtTime = (TextView) promptView.findViewById(R.id.popup_txtTime);
+                final TextView txtTime = (TextView) promptView.findViewById(R.id.popup_txtTime_Begin);
 
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
@@ -362,11 +376,61 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onTimeSet(TimePicker timePicker,
                                                   int selectedHour, int selectMinute) {
-                                txtTime.setText(String.format(Locale.US, "At : %02d:%02d",
-                                        selectedHour, selectMinute));
                                 // Set time on db
-                                taskList.get(position).setTaskHour(selectedHour);
-                                taskList.get(position).setTaskMinute(selectMinute);
+                                if (taskList.get(position).getTaskHourEnd() != -1 &&
+                                        taskList.get(position).getTaskMinuteEnd() != -1 &&
+                                        (taskList.get(position).getTaskHourEnd() < selectedHour ||
+                                                (taskList.get(position).getTaskHourEnd()
+                                                        == selectedHour &&
+                                                        taskList.get(position).getTaskMinuteEnd()
+                                                                < selectMinute))) {
+                                    Toast.makeText(MainActivity.this,
+                                            "Set start time cannot be before end time",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    txtTime.setText(String.format(Locale.US, "%02d:%02d",
+                                            selectedHour, selectMinute));
+                                    taskList.get(position).setTaskHourBegin(selectedHour);
+                                    taskList.get(position).setTaskMinuteBegin(selectMinute);
+                                }
+                            }
+                        }, hour, minute, true);
+                timeDialog.show();
+            }
+        });
+
+        tx_time_end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final TextView txtTime = (TextView) promptView.findViewById(R.id.popup_txtTime_End);
+
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                TimePickerDialog timeDialog = new TimePickerDialog(MainActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker timePicker,
+                                                  int selectedHour, int selectMinute) {
+                                // Set time on db
+                                if (taskList.get(position).getTaskHourBegin() != -1 &&
+                                        taskList.get(position).getTaskMinuteBegin() != -1 &&
+                                        (taskList.get(position).getTaskHourBegin() > selectedHour ||
+                                                (taskList.get(position).getTaskHourBegin()
+                                                        == selectedHour &&
+                                                        taskList.get(position).getTaskMinuteBegin()
+                                                                > selectMinute))) {
+                                    Toast.makeText(MainActivity.this,
+                                            "Set end time cannot be before start time",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    txtTime.setText(String.format(Locale.US, "%02d:%02d",
+                                            selectedHour, selectMinute));
+                                    taskList.get(position).setTaskHourEnd(selectedHour);
+                                    taskList.get(position).setTaskMinuteEnd(selectMinute);
+                                }
                             }
                         }, hour, minute, true);
                 timeDialog.show();
@@ -518,8 +582,10 @@ public class MainActivity extends AppCompatActivity {
                         tmp.setTaskYear(-1);
                         tmp.setTaskMonth(-1);
                         tmp.setTaskDay(-1);
-                        tmp.setTaskHour(-1);
-                        tmp.setTaskMinute(-1);
+                        tmp.setTaskHourBegin(-1);
+                        tmp.setTaskMinuteBegin(-1);
+                        tmp.setTaskHourEnd(-1);
+                        tmp.setTaskMinuteEnd(-1);
                         tmp.setTaskCat(0);
                         tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());

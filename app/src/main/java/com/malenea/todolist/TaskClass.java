@@ -13,8 +13,10 @@ public class TaskClass {
     private int taskYear;
     private int taskMonth;
     private int taskDay;
-    private int taskHour;
-    private int taskMinute;
+    private int taskHourBegin;
+    private int taskMinuteBegin;
+    private int taskHourEnd;
+    private int taskMinuteEnd;
 
     private int taskCat;
 
@@ -30,8 +32,10 @@ public class TaskClass {
         this.taskYear = task.getTaskYear();
         this.taskMonth = task.getTaskMonth();
         this.taskDay = task.getTaskDay();
-        this.taskHour = task.getTaskHour();
-        this.taskMinute = task.getTaskMinute();
+        this.taskHourBegin = task.getTaskHourBegin();
+        this.taskMinuteBegin = task.getTaskMinuteBegin();
+        this.taskHourEnd = task.getTaskHourEnd();
+        this.taskMinuteEnd = task.getTaskMinuteEnd();
         this.taskCat = task.getTaskCat();
         this.taskStatus = task.getTaskStatus();
     }
@@ -54,11 +58,17 @@ public class TaskClass {
     public void setTaskDay(int day) {
         this.taskDay = day;
     }
-    public void setTaskHour(int hour) {
-        this.taskHour = hour;
+    public void setTaskHourBegin(int hour) {
+        this.taskHourBegin = hour;
     }
-    public void setTaskMinute(int minute) {
-        this.taskMinute = minute;
+    public void setTaskMinuteBegin(int minute) {
+        this.taskMinuteBegin = minute;
+    }
+    public void setTaskHourEnd(int hour) {
+        this.taskHourEnd = hour;
+    }
+    public void setTaskMinuteEnd(int minute) {
+        this.taskMinuteEnd = minute;
     }
     public void setTaskCat(int cat) {
         this.taskCat = cat;
@@ -85,11 +95,17 @@ public class TaskClass {
     public int getTaskDay() {
         return taskDay;
     }
-    public int getTaskHour() {
-        return taskHour;
+    public int getTaskHourBegin() {
+        return taskHourBegin;
     }
-    public int getTaskMinute() {
-        return taskMinute;
+    public int getTaskMinuteBegin() {
+        return taskMinuteBegin;
+    }
+    public int getTaskHourEnd() {
+        return taskHourEnd;
+    }
+    public int getTaskMinuteEnd() {
+        return taskMinuteEnd;
     }
     public int getTaskCat() {
         return taskCat;

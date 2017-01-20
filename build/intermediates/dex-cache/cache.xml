@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="f4171860b9367edb7daaa20ab4f38b7a05e48881">
+        sha1="2d0570f0f33327e746d4d73adb48e0c242148ef0">
         <dex dex="/home/conan/Documents/Epitech/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_c938c11480fc77dd0f9d31c6c1efb4605d8b7011/classes.dex" />
     </item>
     <item
@@ -79,7 +79,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="c76ebd5ced3397401c1a736eb5d272e66606051d">
+        sha1="97735fdd8c85ab062df17710bb85c8d68824e905">
         <dex dex="/home/conan/Documents/Epitech/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_476ebe664d27d705f15a1c2c4eeca4af69c8d6fe/classes.dex" />
     </item>
     <item
