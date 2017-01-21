@@ -17,6 +17,7 @@ public class TaskClass {
     private int taskMinuteBegin;
     private int taskHourEnd;
     private int taskMinuteEnd;
+    private Long taskCalId;
 
     private int taskCat;
 
@@ -36,6 +37,7 @@ public class TaskClass {
         this.taskMinuteBegin = task.getTaskMinuteBegin();
         this.taskHourEnd = task.getTaskHourEnd();
         this.taskMinuteEnd = task.getTaskMinuteEnd();
+        this.taskCalId = task.getTaskCalId();
         this.taskCat = task.getTaskCat();
         this.taskStatus = task.getTaskStatus();
     }
@@ -69,6 +71,9 @@ public class TaskClass {
     }
     public void setTaskMinuteEnd(int minute) {
         this.taskMinuteEnd = minute;
+    }
+    public void setTaskCalId(Long id) {
+        this.taskCalId = id;
     }
     public void setTaskCat(int cat) {
         this.taskCat = cat;
@@ -106,6 +111,9 @@ public class TaskClass {
     }
     public int getTaskMinuteEnd() {
         return taskMinuteEnd;
+    }
+    public Long getTaskCalId() {
+        return taskCalId;
     }
     public int getTaskCat() {
         return taskCat;

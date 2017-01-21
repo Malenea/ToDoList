@@ -78,7 +78,7 @@
         android:paddingTop="40dp"
         android:selectAllOnFocus="true"
         android:nextFocusUp="@id/popup_desc"
-        android:nextFocusLeft="@id/popup_desc"/>
+        android:nextFocusLeft="@id/popup_desc" />
 
     <ImageButton
         android:id="@+id/popup_del"
@@ -87,6 +87,15 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/fab_margin" />
+
+    <ImageButton
+        android:id="@+id/popup_calendar_btn"
+        android:background="@drawable/ic_calbtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_margin="@dimen/fab_margin" />
 
     <ImageButton

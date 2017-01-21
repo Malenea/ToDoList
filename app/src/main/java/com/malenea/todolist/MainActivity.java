@@ -1,17 +1,27 @@
 package com.malenea.todolist;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.pm.ActivityInfoCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import static android.R.attr.datePickerDialogTheme;
 import static android.R.attr.typeface;
@@ -286,6 +297,8 @@ public class MainActivity extends AppCompatActivity {
                     txtStatus.setTextColor(Color.BLACK);
                     txtStatus.setText("Unknown");
                 }
+                int ret = dbHelper.updateTask(taskList.get(position));
+                Log.i(LOG_TAG, "Updated status : " + ret);
             }
         });
 
@@ -316,6 +329,8 @@ public class MainActivity extends AppCompatActivity {
                     txtCat.setTextColor(Color.BLACK);
                     txtCat.setText("?");
                 }
+                int ret = dbHelper.updateTask(taskList.get(position));
+                Log.i(LOG_TAG, "Updated category : " + ret);
             }
         });
 
@@ -324,11 +339,53 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 deleteTask(taskList, position);
+                Toast.makeText(MainActivity.this, "Deleted task", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
 
         final Calendar c = Calendar.getInstance();
+
+        ImageButton btnCal = (ImageButton) promptView.findViewById(R.id.popup_calendar_btn);
+        btnCal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (taskList.get(position).getTaskYear() == -1 ||
+                        taskList.get(position).getTaskMonth() == -1 ||
+                        taskList.get(position).getTaskDay() == -1) {
+                    Toast.makeText(MainActivity.this,
+                            "Please enter a valid date before continuing",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (taskList.get(position).getTaskHourBegin() == -1 ||
+                        taskList.get(position).getTaskMinuteBegin() == -1) {
+                    Toast.makeText(MainActivity.this,
+                            "Please enter a valid start time before continuing",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (taskList.get(position).getTaskHourEnd() == -1 ||
+                        taskList.get(position).getTaskMinuteEnd() == -1) {
+                    Toast.makeText(MainActivity.this,
+                            "Please enter a valid end time before continuing",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Put into the Calendar")
+                        .setMessage("Do you want to add the todo task to your calendar ?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                addToCalendar(taskList, position);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .create();
+                dialog.show();
+            }
+        });
 
         tx_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,8 +411,12 @@ public class MainActivity extends AppCompatActivity {
                                 taskList.get(position).setTaskYear(year);
                                 taskList.get(position).setTaskMonth(monthOfYear + 1);
                                 taskList.get(position).setTaskDay(dayOfMonth);
+                                Toast.makeText(MainActivity.this, "Updated date",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }, mYear, mMonth, mDay);
+                int ret = dbHelper.updateTask(taskList.get(position));
+                Log.i(LOG_TAG, "Updated date : " + ret);
                 dateDialog.show();
 
             }
@@ -392,9 +453,13 @@ public class MainActivity extends AppCompatActivity {
                                             selectedHour, selectMinute));
                                     taskList.get(position).setTaskHourBegin(selectedHour);
                                     taskList.get(position).setTaskMinuteBegin(selectMinute);
+                                    Toast.makeText(MainActivity.this, "Updated start time",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, hour, minute, true);
+                int ret = dbHelper.updateTask(taskList.get(position));
+                Log.i(LOG_TAG, "Updated start time : " + ret);
                 timeDialog.show();
             }
         });
@@ -430,9 +495,13 @@ public class MainActivity extends AppCompatActivity {
                                             selectedHour, selectMinute));
                                     taskList.get(position).setTaskHourEnd(selectedHour);
                                     taskList.get(position).setTaskMinuteEnd(selectMinute);
+                                    Toast.makeText(MainActivity.this, "Updated end time",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, hour, minute, true);
+                int ret = dbHelper.updateTask(taskList.get(position));
+                Log.i(LOG_TAG, "Updated end time : " + ret);
                 timeDialog.show();
             }
         });
@@ -447,6 +516,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 int ret = dbHelper.updateTask(taskList.get(position));
                 Log.i(LOG_TAG, "Update returned : " + ret);
+                Toast.makeText(MainActivity.this, "Updated task", Toast.LENGTH_SHORT).show();
                 loadTaskList(status_state_choice, cat_state_choice, null);
                 dialog.dismiss();
             }
@@ -454,6 +524,69 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.setView(promptView);
         dialog.show();
+    }
+
+    private void addToCalendar(ArrayList<TaskClass> taskList, int position) {
+        /*
+        Intent calendarIntent = new Intent(Intent.ACTION_INSERT);
+        calendarIntent.setType("vnd.android.cursor.item/event");
+        */
+        final Calendar c_begin = Calendar.getInstance();
+        c_begin.set(taskList.get(position).getTaskYear(),
+                taskList.get(position).getTaskMonth(),
+                taskList.get(position).getTaskDay(),
+                taskList.get(position).getTaskHourBegin(),
+                taskList.get(position).getTaskMinuteBegin());
+        final Calendar c_end = Calendar.getInstance();
+        c_end.set(taskList.get(position).getTaskYear(),
+                taskList.get(position).getTaskMonth(),
+                taskList.get(position).getTaskDay(),
+                taskList.get(position).getTaskHourEnd(),
+                taskList.get(position).getTaskMinuteEnd());
+        /*
+        calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                c_begin.getTimeInMillis());
+        calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+                c_end.getTimeInMillis());
+        calendarIntent.putExtra(CalendarContract.Events.TITLE,
+                taskList.get(position).getTaskTitle());
+        calendarIntent.putExtra(CalendarContract.Events.DESCRIPTION,
+                taskList.get(position).getTaskDesc());
+        startActivity(calendarIntent);
+        */
+        ContentResolver cr = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.DTSTART, c_begin.getTimeInMillis());
+        values.put(CalendarContract.Events.DTEND, c_end.getTimeInMillis());
+        values.put(CalendarContract.Events.TITLE, taskList.get(position).getTaskTitle());
+        values.put(CalendarContract.Events.DESCRIPTION, taskList.get(position).getTaskDesc());
+        values.put(CalendarContract.Events.CALENDAR_ID, 1);
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getDisplayName());
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            final int MY_PERMISSIONS_WRITE_CALENDAR = 0;
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]
+                    {Manifest.permission.WRITE_CALENDAR}, MY_PERMISSIONS_WRITE_CALENDAR);
+        } else {
+            Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+            Long eventID = Long.parseLong(uri.getLastPathSegment());
+            taskList.get(position).setTaskCalId(eventID);
+            dbHelper.updateTask(taskList.get(position));
+
+            Log.i(LOG_TAG, "Added task to calendar : "
+                    + taskList.get(position).getTaskTitle() + " with id : " + eventID);
+        }
+    }
+
+    private void deleteFromCalendar(ArrayList<TaskClass> taskList, int position) {
+        ContentResolver cr = getContentResolver();
+        ContentValues values = new ContentValues();
+        Uri deleteUri = null;
+
+        deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI,
+                taskList.get(position).getTaskCalId());
+        int rows = getContentResolver().delete(deleteUri, null, null);
+        Log.i(LOG_TAG, "Rows deleted : " + rows);
     }
 
     public void searchItem(final View view) {
@@ -586,6 +719,7 @@ public class MainActivity extends AppCompatActivity {
                         tmp.setTaskMinuteBegin(-1);
                         tmp.setTaskHourEnd(-1);
                         tmp.setTaskMinuteEnd(-1);
+                        tmp.setTaskCalId(-1L);
                         tmp.setTaskCat(0);
                         tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());
@@ -607,6 +741,9 @@ public class MainActivity extends AppCompatActivity {
     public void deleteTask(ArrayList<TaskClass> list, int position) {
         final TextView tx_info = (TextView) findViewById(R.id.information);
         dbHelper.deleteTask(list.get(position));
+        if (list.get(position).getTaskCalId() > 0) {
+            deleteFromCalendar(list, position);
+        }
         if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
             tx_info.setTextColor(Color.RED);
             tx_info.setText("Task list is empty");
@@ -614,4 +751,5 @@ public class MainActivity extends AppCompatActivity {
             tx_info.setText("");
         }
     }
+
 }

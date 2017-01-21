@@ -18,6 +18,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME="ToDoListDb.db";
     private static final int DB_VER = 1;
     public static final String DB_TABLE="Task";
+
     public static final String DB_ID="id";
     public static final String DB_COLUMN_TITLE="TaskName";
     public static final String DB_COLUMN_DESC="TaskDesc";
@@ -29,6 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_COLUMN_MINUTE_BEGIN="TaskMinuteBegin";
     public static final String DB_COLUMN_HOUR_END="TaskHourEnd";
     public static final String DB_COLUMN_MINUTE_END="TaskMinuteEnd";
+    public static final String DB_COLUMN_CALENDAR_ID="TaskCalId";
 
     public static final String DB_COLUMN_CATEGORY="TaskCategory";
     public static final String DB_COLUMN_STATUS="TaskStatus";
@@ -52,6 +54,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 DB_COLUMN_MINUTE_BEGIN + " INTEGER, " +
                 DB_COLUMN_HOUR_END + " INTEGER, " +
                 DB_COLUMN_MINUTE_END + " INTEGER, " +
+                DB_COLUMN_CALENDAR_ID + " BIGINT, " +
                 DB_COLUMN_CATEGORY + " INTEGER, " +
                 DB_COLUMN_STATUS + " INTEGER" +
                 ")";
@@ -76,6 +79,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DB_COLUMN_MINUTE_BEGIN, task.getTaskMinuteBegin());
         values.put(DB_COLUMN_HOUR_END, task.getTaskHourEnd());
         values.put(DB_COLUMN_MINUTE_END, task.getTaskMinuteEnd());
+        values.put(DB_COLUMN_CALENDAR_ID, task.getTaskCalId());
         values.put(DB_COLUMN_CATEGORY, task.getTaskCat());
         values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         db.insert(DB_TABLE, null, values);
@@ -101,6 +105,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(DB_COLUMN_MINUTE_BEGIN, task.getTaskMinuteBegin());
         values.put(DB_COLUMN_HOUR_END, task.getTaskHourEnd());
         values.put(DB_COLUMN_MINUTE_END, task.getTaskMinuteEnd());
+        values.put(DB_COLUMN_CALENDAR_ID, task.getTaskCalId());
         values.put(DB_COLUMN_CATEGORY, task.getTaskCat());
         values.put(DB_COLUMN_STATUS, task.getTaskStatus());
         Log.i(LOG_TAG, "Updating id : " + task.getTaskId());
@@ -172,6 +177,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 task.setTaskMinuteBegin(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MINUTE_BEGIN)));
                 task.setTaskHourEnd(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_HOUR_END)));
                 task.setTaskMinuteEnd(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_MINUTE_END)));
+                task.setTaskCalId(cursor.getLong(cursor.getColumnIndex(DB_COLUMN_CALENDAR_ID)));
                 task.setTaskCat(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_CATEGORY)));
                 task.setTaskStatus(cursor.getInt(cursor.getColumnIndex(DB_COLUMN_STATUS)));
                 taskList.add(task);
