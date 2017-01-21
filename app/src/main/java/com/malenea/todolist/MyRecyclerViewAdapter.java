@@ -13,6 +13,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by conan on 14/01/17.
@@ -79,6 +80,40 @@ public class MyRecyclerViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
+
+        Calendar c = Calendar.getInstance();
+        final int year = c.get(Calendar.YEAR);
+        final int month = c.get(Calendar.MONTH) + 1;
+        final int day = c.get(Calendar.DAY_OF_MONTH);
+        final int hour = c.get(Calendar.HOUR_OF_DAY);
+        final int minute = c.get(Calendar.MINUTE);
+
+        android.support.v7.widget.CardView bg =
+                (android.support.v7.widget.CardView) holder.itemView.findViewById(R.id.card_view);
+        if (mDataset.get(position).getTaskYear() == 9999 ||
+                mDataset.get(position).getTaskMonth() == 99 ||
+                mDataset.get(position).getTaskDay() == 99) {
+            bg.setCardBackgroundColor(Color.parseColor("#df816f"));
+        } else if (mDataset.get(position).getTaskYear() < year ||
+                (mDataset.get(position).getTaskYear() == year &&
+                mDataset.get(position).getTaskMonth() < month) ||
+                (mDataset.get(position).getTaskYear() == year &&
+                mDataset.get(position).getTaskMonth() == month &&
+                mDataset.get(position).getTaskDay() < day) ||
+                (mDataset.get(position).getTaskYear() == year &&
+                mDataset.get(position).getTaskMonth() == month &&
+                mDataset.get(position).getTaskDay() == day &&
+                mDataset.get(position).getTaskHourBegin() < hour) ||
+                (mDataset.get(position).getTaskYear() == year &&
+                mDataset.get(position).getTaskMonth() == month &&
+                mDataset.get(position).getTaskDay() == day &&
+                mDataset.get(position).getTaskHourBegin() == hour &&
+                mDataset.get(position).getTaskMinuteBegin() < minute)
+                ) {
+            Log.i(LOG_TAG, "Got : " + year + "/" + month + "/" + day + " - " + hour + ":" + minute);
+            bg.setCardBackgroundColor(Color.parseColor("#e1a966"));
+        }
+
         holder.label.setText(mDataset.get(position).getTaskTitle());
 
         if (mDataset.get(position).getTaskStatus() == 0) {
@@ -109,9 +144,9 @@ public class MyRecyclerViewAdapter extends RecyclerView
             holder.catType.setText("Hobbies");
         }
 
-        if (mDataset.get(position).getTaskDay() == -1 ||
-                mDataset.get(position).getTaskMonth() == -1 ||
-                mDataset.get(position).getTaskYear() == -1) {
+        if (mDataset.get(position).getTaskDay() == 99 ||
+                mDataset.get(position).getTaskMonth() == 99 ||
+                mDataset.get(position).getTaskYear() == 9999) {
             holder.dateTime.setText("No date set yet.");
         } else {
             holder.dateTime.setText(mDataset.get(position).getTaskDay()

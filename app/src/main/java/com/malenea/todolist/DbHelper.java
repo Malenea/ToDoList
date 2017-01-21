@@ -118,45 +118,85 @@ public class DbHelper extends SQLiteOpenHelper {
         if (search == null) {
             if (stat == 0) {
                 if (cat == 0) {
-                    selectQuery = "SELECT * FROM " + DB_TABLE;
-                } else {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
-                            " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1);
-                }
-            } else {
-                if (cat == 0) {
-                    selectQuery = "SELECT * FROM " + DB_TABLE +
-                            " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1);
-                } else {
-                    selectQuery = "SELECT * FROM " + DB_TABLE +
-                            " WHERE " +
-                            DB_COLUMN_CATEGORY + " = " + (cat - 1) +
-                            " AND " +
-                            DB_COLUMN_STATUS + " = " + (stat - 1);
-                }
-            }
-        } else {
-            if (stat == 0) {
-                if (cat == 0) {
-                    selectQuery = "SELECT * FROM " + DB_TABLE +
-                            " WHERE " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"";
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
                 } else {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1) +
-                            " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"";
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
                 }
             } else {
                 if (cat == 0) {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1) +
-                            " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"";
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
                 } else {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " +
                             DB_COLUMN_CATEGORY + " = " + (cat - 1) +
                             " AND " +
                             DB_COLUMN_STATUS + " = " + (stat - 1) +
-                            " AND " + DB_COLUMN_TITLE + " LIKE\"%" + search + "%\"";
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                }
+            }
+        } else {
+            if (stat == 0) {
+                if (cat == 0) {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"" +
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                } else {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1) +
+                            " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"" +
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                }
+            } else {
+                if (cat == 0) {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1) +
+                            " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"" +
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                } else {
+                    selectQuery = "SELECT * FROM " + DB_TABLE +
+                            " WHERE " +
+                            DB_COLUMN_CATEGORY + " = " + (cat - 1) +
+                            " AND " +
+                            DB_COLUMN_STATUS + " = " + (stat - 1) +
+                            " AND " + DB_COLUMN_TITLE + " LIKE\"%" + search + "%\"" +
+                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                            DB_COLUMN_MONTH + " DESC, " +
+                            DB_COLUMN_DAY + " DESC, " +
+                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                            DB_COLUMN_MINUTE_BEGIN + " DESC";
                 }
             }
         }

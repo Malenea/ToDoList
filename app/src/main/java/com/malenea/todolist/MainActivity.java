@@ -251,9 +251,9 @@ public class MainActivity extends AppCompatActivity {
             tx_cat.setText("Hobbies");
         }
 
-        if (taskList.get(position).getTaskYear() == -1 ||
-                taskList.get(position).getTaskMonth() == -1 ||
-                taskList.get(position).getTaskDay() == -1) {
+        if (taskList.get(position).getTaskYear() == 9999 ||
+                taskList.get(position).getTaskMonth() == 99 ||
+                taskList.get(position).getTaskDay() == 99) {
             tx_date.setText("No date set yet.");
         } else {
             tx_date.setText("For the : " +
@@ -261,16 +261,16 @@ public class MainActivity extends AppCompatActivity {
                     taskList.get(position).getTaskMonth() + "/" +
                     taskList.get(position).getTaskYear());
         }
-        if (taskList.get(position).getTaskHourBegin() == -1 ||
-                taskList.get(position).getTaskMinuteBegin() == -1) {
+        if (taskList.get(position).getTaskHourBegin() == 99 ||
+                taskList.get(position).getTaskMinuteBegin() == 99) {
             tx_time_begin.setText("??:??");
         } else {
             tx_time_begin.setText(String.format(Locale.US, "%02d:%02d",
                     taskList.get(position).getTaskHourBegin(),
                     taskList.get(position).getTaskMinuteBegin()));
         }
-        if (taskList.get(position).getTaskHourEnd() == -1 ||
-                taskList.get(position).getTaskMinuteEnd() == -1) {
+        if (taskList.get(position).getTaskHourEnd() == 99 ||
+                taskList.get(position).getTaskMinuteEnd() == 99) {
             tx_time_end.setText("??:??");
         } else {
             tx_time_end.setText(String.format(Locale.US, "%02d:%02d",
@@ -350,23 +350,23 @@ public class MainActivity extends AppCompatActivity {
         btnCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (taskList.get(position).getTaskYear() == -1 ||
-                        taskList.get(position).getTaskMonth() == -1 ||
-                        taskList.get(position).getTaskDay() == -1) {
+                if (taskList.get(position).getTaskYear() == 9999 ||
+                        taskList.get(position).getTaskMonth() == 99 ||
+                        taskList.get(position).getTaskDay() == 99) {
                     Toast.makeText(MainActivity.this,
                             "Please enter a valid date before continuing",
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (taskList.get(position).getTaskHourBegin() == -1 ||
-                        taskList.get(position).getTaskMinuteBegin() == -1) {
+                if (taskList.get(position).getTaskHourBegin() == 99 ||
+                        taskList.get(position).getTaskMinuteBegin() == 99) {
                     Toast.makeText(MainActivity.this,
                             "Please enter a valid start time before continuing",
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (taskList.get(position).getTaskHourEnd() == -1 ||
-                        taskList.get(position).getTaskMinuteEnd() == -1) {
+                if (taskList.get(position).getTaskHourEnd() == 99 ||
+                        taskList.get(position).getTaskMinuteEnd() == 99) {
                     Toast.makeText(MainActivity.this,
                             "Please enter a valid end time before continuing",
                             Toast.LENGTH_SHORT).show();
@@ -438,8 +438,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker timePicker,
                                                   int selectedHour, int selectMinute) {
                                 // Set time on db
-                                if (taskList.get(position).getTaskHourEnd() != -1 &&
-                                        taskList.get(position).getTaskMinuteEnd() != -1 &&
+                                if (taskList.get(position).getTaskHourEnd() != 99 &&
+                                        taskList.get(position).getTaskMinuteEnd() != 99 &&
                                         (taskList.get(position).getTaskHourEnd() < selectedHour ||
                                                 (taskList.get(position).getTaskHourEnd()
                                                         == selectedHour &&
@@ -712,13 +712,13 @@ public class MainActivity extends AppCompatActivity {
                         String task = String.valueOf(taskEditText.getText());
                         tmp.setTaskTitle(task);
                         tmp.setTaskDesc("No note associated to this todo task yet.");
-                        tmp.setTaskYear(-1);
-                        tmp.setTaskMonth(-1);
-                        tmp.setTaskDay(-1);
-                        tmp.setTaskHourBegin(-1);
-                        tmp.setTaskMinuteBegin(-1);
-                        tmp.setTaskHourEnd(-1);
-                        tmp.setTaskMinuteEnd(-1);
+                        tmp.setTaskYear(9999);
+                        tmp.setTaskMonth(99);
+                        tmp.setTaskDay(99);
+                        tmp.setTaskHourBegin(99);
+                        tmp.setTaskMinuteBegin(99);
+                        tmp.setTaskHourEnd(99);
+                        tmp.setTaskMinuteEnd(99);
                         tmp.setTaskCalId(-1L);
                         tmp.setTaskCat(0);
                         tmp.setTaskStatus(0);
