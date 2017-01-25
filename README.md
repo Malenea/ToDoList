@@ -6,27 +6,27 @@ This TodoList project is meant to provide a simple yet fully functional TodoList
 
 ### Launching the app
 
-'''
+```
 Example
-'''
+```
 
 ### Adding a task
 
-'''
+```
 Example
-'''
+```
 
 ### Delete a task
 
-'''
+```
 Example
-'''
+```
 
 ### Edit a task
 
-'''
+```
 Example
-'''
+```
 
 ## Build with
 
