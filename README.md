@@ -6,6 +6,8 @@ This TodoList project is meant to provide a simple yet fully functional TodoList
 
 ### Launching the app
 
+![alt tag](https://raw.githubusercontent.com/Malenea/ToDoList/master/README_assets/phone_menu.jpg)
+
 ```
 Example
 ```
