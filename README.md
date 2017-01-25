@@ -6,10 +6,11 @@ This TodoList project is meant to provide a simple yet fully functional TodoList
 
 ### Launching the app
 
-![alt tag](https://raw.githubusercontent.com/Malenea/ToDoList/master/README_assets/phone_menu.jpg)
+![alt tag](http://i.imgur.com/fwmV2Vy.jpg)
 
 ```
-Example
+Start by launching the application by clicking on the todolist button on your phone.
+That should get you to the main menu of the application (as shown above).
 ```
 
 ### Adding a task
