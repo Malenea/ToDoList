@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
     private static int cat_state_choice = 0;
     private static int status_state_choice = 0;
 
+    private static boolean order_choice = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tx = (TextView) findViewById(R.id.program_title);
         tx.setTypeface(custom_font);
+        tx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeOrderChoice();
+            }
+        });
 
         TextView tx_info = (TextView) findViewById(R.id.information);
         tx_info.setTextColor(Color.RED);
@@ -126,28 +134,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         dbHelper = new DbHelper(this);
-        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+        if (loadTaskList(null).isEmpty()) {
             tx_info.setText("Task list is empty");
         } else {
             tx_info.setText("");
         }
     }
 
-    private ArrayList<TaskClass> loadTaskList(int stat, int cat, String search) {
+    private void changeOrderChoice() {
+        TextView title = (TextView) findViewById(R.id.program_title);
+        order_choice = order_choice ? false : true;
+        title.setText(!order_choice ? "! tsiL odoT yM" : "My Todo List !");
+        loadTaskList(null);
+    }
+
+    private ArrayList<TaskClass> loadTaskList(String search) {
         mRecyclerView = (RecyclerView) findViewById(R.id.listTask);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MyRecyclerViewAdapter(getDataSet(stat, cat, search));
-        listHandler = new ArrayList<>(getDataSet(stat, cat, search));
+        mAdapter = new MyRecyclerViewAdapter(getDataSet(status_state_choice, cat_state_choice,
+                search));
+        listHandler = new ArrayList<>(getDataSet(status_state_choice, cat_state_choice, search));
 
         mRecyclerView.setAdapter(mAdapter);
         return listHandler;
     }
 
     private ArrayList<TaskClass> getDataSet(int stat, int cat, String search) {
-        ArrayList<TaskClass> results = dbHelper.getTaskList(stat, cat, search);
+        ArrayList<TaskClass> results = dbHelper.getTaskList(stat, cat, search, order_choice);
         return results;
     }
 
@@ -517,7 +533,7 @@ public class MainActivity extends AppCompatActivity {
                 int ret = dbHelper.updateTask(taskList.get(position));
                 Log.i(LOG_TAG, "Update returned : " + ret);
                 Toast.makeText(MainActivity.this, "Updated task", Toast.LENGTH_SHORT).show();
-                loadTaskList(status_state_choice, cat_state_choice, null);
+                loadTaskList(null);
                 dialog.dismiss();
             }
         });
@@ -604,15 +620,13 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String task = String.valueOf(taskEditText.getText());
-                                if (loadTaskList(status_state_choice, cat_state_choice,
-                                        task).isEmpty()) {
+                                if (loadTaskList(task).isEmpty()) {
                                     tx_info.setTextColor(Color.RED);
                                     tx_info.setText("Task list is empty");
                                     tx_info.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            if (loadTaskList(status_state_choice, cat_state_choice,
-                                                    null).isEmpty()) {
+                                            if (loadTaskList(null).isEmpty()) {
                                                 tx_info.setTextColor(Color.RED);
                                                 tx_info.setText("Task list is empty");
                                             } else {
@@ -652,7 +666,7 @@ public class MainActivity extends AppCompatActivity {
             tx_stat.setTextColor(Color.GRAY);
             tx_stat.setText("All");
         }
-        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+        if (loadTaskList(null).isEmpty()) {
             tx_info.setTextColor(Color.RED);
             tx_info.setText("Task list is empty");
         } else {
@@ -689,7 +703,7 @@ public class MainActivity extends AppCompatActivity {
             tx_cat.setTextColor(Color.GRAY);
             tx_cat.setText("All");
         }
-        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+        if (loadTaskList(null).isEmpty()) {
             tx_info.setTextColor(Color.RED);
             tx_info.setText("Task list is empty");
         } else {
@@ -724,7 +738,7 @@ public class MainActivity extends AppCompatActivity {
                         tmp.setTaskStatus(0);
                         Log.i(LOG_TAG, "Created new task : " + tmp.getTaskTitle());
                         dbHelper.insertNewTask(tmp);
-                        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+                        if (loadTaskList(null).isEmpty()) {
                             tx_info.setTextColor(Color.RED);
                             tx_info.setText("Task list is empty");
                         } else {
@@ -744,7 +758,7 @@ public class MainActivity extends AppCompatActivity {
         if (list.get(position).getTaskCalId() > 0) {
             deleteFromCalendar(list, position);
         }
-        if (loadTaskList(status_state_choice, cat_state_choice, null).isEmpty()) {
+        if (loadTaskList(null).isEmpty()) {
             tx_info.setTextColor(Color.RED);
             tx_info.setText("Task list is empty");
         } else {

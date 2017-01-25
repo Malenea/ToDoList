@@ -112,47 +112,45 @@ public class DbHelper extends SQLiteOpenHelper {
         return db.update(DB_TABLE, values, DB_ID + " = " + task.getTaskId(), null);
     }
 
-    public ArrayList<TaskClass> getTaskList(int stat, int cat, String search) {
+    public ArrayList<TaskClass> getTaskList(int stat, int cat, String search, boolean order) {
         ArrayList<TaskClass> taskList = new ArrayList<>();
         String selectQuery;
+        String cmdOrder;
+        if (order) {
+            cmdOrder = " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
+                    DB_COLUMN_MONTH + " DESC, " +
+                    DB_COLUMN_DAY + " DESC, " +
+                    DB_COLUMN_HOUR_BEGIN + " DESC, " +
+                    DB_COLUMN_MINUTE_BEGIN + " DESC";
+        } else {
+            cmdOrder = " ORDER BY " + DB_COLUMN_YEAR + " ASC, " +
+                    DB_COLUMN_MONTH + " ASC, " +
+                    DB_COLUMN_DAY + " ASC, " +
+                    DB_COLUMN_HOUR_BEGIN + " ASC, " +
+                    DB_COLUMN_MINUTE_BEGIN + " ASC";
+        }
         if (search == null) {
             if (stat == 0) {
                 if (cat == 0) {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 } else {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1) +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 }
             } else {
                 if (cat == 0) {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1) +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 } else {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " +
                             DB_COLUMN_CATEGORY + " = " + (cat - 1) +
                             " AND " +
                             DB_COLUMN_STATUS + " = " + (stat - 1) +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 }
             }
         } else {
@@ -160,31 +158,19 @@ public class DbHelper extends SQLiteOpenHelper {
                 if (cat == 0) {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"" +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 } else {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " + DB_COLUMN_CATEGORY + " = " + (cat - 1) +
                             " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"" +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 }
             } else {
                 if (cat == 0) {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " + DB_COLUMN_STATUS + " = " + (stat - 1) +
                             " AND " + DB_COLUMN_TITLE + " LIKE \"%" + search + "%\"" +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 } else {
                     selectQuery = "SELECT * FROM " + DB_TABLE +
                             " WHERE " +
@@ -192,11 +178,7 @@ public class DbHelper extends SQLiteOpenHelper {
                             " AND " +
                             DB_COLUMN_STATUS + " = " + (stat - 1) +
                             " AND " + DB_COLUMN_TITLE + " LIKE\"%" + search + "%\"" +
-                            " ORDER BY " + DB_COLUMN_YEAR + " DESC, " +
-                            DB_COLUMN_MONTH + " DESC, " +
-                            DB_COLUMN_DAY + " DESC, " +
-                            DB_COLUMN_HOUR_BEGIN + " DESC, " +
-                            DB_COLUMN_MINUTE_BEGIN + " DESC";
+                            cmdOrder;
                 }
             }
         }
