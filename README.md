@@ -95,6 +95,7 @@ This is a simple todo task list relying on the default Android SQLite Database h
 a java class and displaying informations on a RecycleView using a custom adapter to populate it.
 
 
+```
  Overview :
      *-----------------*  request *---------------*            *---------------*
      |                 |<---------*               | task list  |               |
@@ -126,6 +127,7 @@ a java class and displaying informations on a RecycleView using a custom adapter
                              |  *-----------------*          *-*------*--------*
                              |                          Delete |      | Edit
                              *---------------------------------*------*
+```
 
 ## Build with
 
