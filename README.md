@@ -129,6 +129,35 @@ a java class and displaying informations on a RecycleView using a custom adapter
                              *---------------------------------*------*
 ```
 
+* The SQLite Database is what contains all our data. It's provided by default by Android and
+doesn't require further modules or installation processes.
+* The DB Handler is a java class that will make SQL requests to the database, using SQL syntax
+such as "SELECT [...] FROM [...]".
+On creation of the main activity or on update, it will generate or re-generate an ArrayList of
+a class that will contain the data of each item.
+```
+ArrayList<TaskClass>
+```
+The list containing each item will then be returned to the main activity.
+The DB Handler will also make request for edition and deletion of tasks.
+Each action requiring interaction with the database should and will go through the DB Handler.
+* The Main Activity is, as the name suggests, our main activity. It will handle updates and
+list management.
+* The custom adapter is the glue between the Main Activity and the Layout, it will populate
+each row with the data from each item of the list allowing us to access it from anywhere and
+display it the way we want.
+* The layout of the Task Activity acts like an inflate of a layout from the items in the list.
+It will simply display all the informations from an item allowing us to modify it / delete it
+using DB Handler's methods.
+It can also interact with the calendar in order to add / delete activities accordingly to the
+current task.
+* Upon creation / edition and / or deletion, the application will go back to it's initial state,
+updating the current list with the new parameters via the following setup:
+```
+Db --query--> DB Handler --list--> Main Activity --adapter--> Layout
+```
+Constantly updating information on screen accordingly to any modification made.
+
 ## Build with
 
 * [Android Studio](https://developer.android.com/studio/index.html) - Android Framework
