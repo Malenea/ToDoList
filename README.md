@@ -6,7 +6,7 @@ This TodoList project is meant to provide a simple yet fully functional TodoList
 
 ### Launching the app
 
-![alt tag](http://i.imgur.com/fwmV2Vy.jpg)
+![alt tag](http://i.imgur.com/SQQ7XPA.jpg)
 
 ```
 Start by launching the application by clicking on the todolist button on your phone.
