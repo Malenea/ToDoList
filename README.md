@@ -84,6 +84,49 @@ Upon clicking, a new window will appear allowing you to change the date or time 
 
 ![alt tag](http://i.imgur.com/3kfIGvj.jpg) ![alt tag](http://i.imgur.com/8Bybvf8.jpg)
 
+On the task screen, you can also modify the task's title by simply clicking on it, wich will
+pop a new window to edit the title.
+
+![alt tag](http://i.imgur.com/qFGQr77.jpg)
+
+### Conception
+
+This is a simple todo task list relying on the default Android SQLite Database handled by
+a java class and displaying informations on a RecycleView using a custom adapter to populate it.
+
+
+ Overview :
+     *-----------------*  request *---------------*            *---------------*
+     |                 |<---------*               | task list  |               |
+     | SQLite Database *          |  DB Handler   *----------->* Main Activity |
+     |                 |--------->*               |            |               |
+     *-----------------*  query   *-------*-------*            *-------*-------*
+                                      ^   '          Update            |
+                                      |   *- - - - - - -*--------------*
+                                      |                 |
+                                      |                 v
+                                      |        *--------*--------*
+                                      |        |                 |      *------------------*
+                                      |        | Custom Adapter  |      |                  |
+                    SQLite DB Request |        |                 |      | Android Calendar |
+                                      |        *--------*--------*      |                  |
+                                      |                 |               *--------*---------*
+                                      |                 v                        |
+                                      |    *------------*-----------*            |
+                                      |    |                        |            |
+                                      |    | Layout / Recycler View |            | Calendar add
+                             *--------*    |                        |            |
+                             |        |    *--*------------------*--*            |
+                             |        |       |                  |               |
+                             |        |       v                  v               |
+                             |  *-----*-------*---*          *---*-------------* |
+                             |  |                 |          |                 | |
+                             |  | Create / sort   |          | Task Activity   *-*
+                             |  |                 |          |                 |
+                             |  *-----------------*          *-*------*--------*
+                             |                          Delete |      | Edit
+                             *---------------------------------*------*
+
 ## Build with
 
 * [Android Studio](https://developer.android.com/studio/index.html) - Android Framework
