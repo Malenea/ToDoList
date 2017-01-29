@@ -20,9 +20,10 @@ in several ways:
 to it's default. By default, the tasks are listed from the latest date to the oldest one.
 You can know wether it's in default mode or not looking at the title, in default mode, the
 title is not reversed.
-* lol
+* This button will allow you to create a new task by defining it's title.
+cf [create an anchor](#AddTask)
 
-### Adding a task
+### (#AddTask) Adding a task
 
 ```
 Example
