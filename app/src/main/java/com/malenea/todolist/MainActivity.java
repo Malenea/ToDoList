@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ArrayList<TaskClass> getDataSet(int stat, int cat, String search) {
-        ArrayList<TaskClass> results = dbHelper.getTaskList(stat, cat, search, order_choice);
+        ArrayList<TaskClass> results  = dbHelper.getTaskList(stat, cat, search, order_choice);
         return results;
     }
 
